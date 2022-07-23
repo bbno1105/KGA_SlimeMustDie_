@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3833551271821241288}
   - component: {fileID: 1357683400214191874}
   m_Layer: 0
-  m_Name: Eye_00_R covered
+  m_Name: Eye_00_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4853816704236791899
 Transform:
   m_ObjectHideFlags: 0

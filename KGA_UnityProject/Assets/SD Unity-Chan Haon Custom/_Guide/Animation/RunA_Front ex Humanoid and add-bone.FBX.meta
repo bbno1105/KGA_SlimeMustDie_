@@ -1063,7 +1063,8 @@ ModelImporter:
     - name: Prop_L
       parentName: Hand_L
       position: {x: -0.000000019073486, y: -0.000000038146972, z: 0.000000009536743}
-      rotation: {x: -0.00000005029142, y: -0.000000016763803, z: -0.000000059604645, w: 1}
+      rotation: {x: -0.00000005029142, y: -0.000000016763803, z: -0.000000059604645,
+        w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Lower_Arm_L_twist_00
       parentName: Lower_Arm_L
@@ -1198,7 +1199,8 @@ ModelImporter:
     - name: Prop_R
       parentName: Hand_R
       position: {x: 0.000000019073486, y: -0.000000038146972, z: 0}
-      rotation: {x: -0.00000009965152, y: -0.000000036321563, z: -0.00000010430811, w: 1}
+      rotation: {x: -0.00000009965152, y: -0.000000036321563, z: -0.00000010430811,
+        w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Lower_Arm_R_twist_00
       parentName: Lower_Arm_R
@@ -1298,12 +1300,14 @@ ModelImporter:
     - name: Hair_DownTwinTail_R_01
       parentName: Hair_DownTwinTail_R_00
       position: {x: -0.19392444, y: -0.00017490386, z: -0.000000009536743}
-      rotation: {x: -0.0000000055879354, y: 0.000000007450581, z: -0.000000014901161, w: 1}
+      rotation: {x: -0.0000000055879354, y: 0.000000007450581, z: -0.000000014901161,
+        w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Hair_DownTwinTail_R_02
       parentName: Hair_DownTwinTail_R_01
       position: {x: -0.2196582, y: -0.00015594481, z: 0.000000028610229}
-      rotation: {x: -0.0000000055879354, y: 0.000000007450581, z: -0.000000014901161, w: 1}
+      rotation: {x: -0.0000000055879354, y: 0.000000007450581, z: -0.000000014901161,
+        w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Hair_Front_00
       parentName: Head

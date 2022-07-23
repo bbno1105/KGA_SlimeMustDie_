@@ -1,14 +1,11 @@
 fileFormatVersion: 2
 guid: a442a3b64511af44db4cede4743c81b7
 ModelImporter:
-  serializedVersion: 19301
+  serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
     second: StandC@loop
-  - first:
-      74: -7954029954066596017
-    second: StandC@loop NoUseFacialKey
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -68,7 +65,21 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Info
+      - path: Accessory_00
+        weight: 0
+      - path: Costume_01
+        weight: 0
+      - path: Costume_01_Skin
+        weight: 0
+      - path: Eye_00
+        weight: 0
+      - path: Hair_00
+        weight: 0
+      - path: Hair_05
+        weight: 0
+      - path: info
+        weight: 0
+      - path: Manteau_00
         weight: 0
       - path: Root
         weight: 1
@@ -81,6 +92,8 @@ ModelImporter:
       - path: Root/center/Hips/Spine/Chest
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Accessory_SpineRibbon_00
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L
         weight: 1
@@ -96,17 +109,25 @@ ModelImporter:
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Index_Proximal/Finger_L_Index_Intermediate
         weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Index_Proximal/Finger_L_Index_Intermediate/Finger_L_Index_Distal
+        weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Middle_Proximal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Middle_Proximal/Finger_L_Middle_Intermediate
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Middle_Proximal/Finger_L_Middle_Intermediate/Finger_L_Middle_Distal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Pinky_Proximal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Pinky_Proximal/Finger_L_Pinky_Intermediate
         weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Pinky_Proximal/Finger_L_Pinky_Intermediate/Finger_L_Pinky_Distal
+        weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Ring_Proximal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Ring_Proximal/Finger_L_Ring_Intermediate
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Ring_Proximal/Finger_L_Ring_Intermediate/Finger_L_Ring_Distal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Finger_L_Thumb_Proximal
         weight: 1
@@ -117,6 +138,14 @@ ModelImporter:
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Hand_L/Prop_L
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Lower_Arm_L_twist_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Sleeve_Bell_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Sleeve_Bell_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Sleeve_Bell_L_02
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Lower_Arm_L/Sleeve_Bell_L_03
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_L/Upper_Arm_L/Upper_Arm_L_twist_00
         weight: 1
@@ -134,17 +163,25 @@ ModelImporter:
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Index_Proximal/Finger_R_Index_Intermediate
         weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Index_Proximal/Finger_R_Index_Intermediate/Finger_R_Index_Distal
+        weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Middle_Proximal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Middle_Proximal/Finger_R_Middle_Intermediate
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Middle_Proximal/Finger_R_Middle_Intermediate/Finger_R_Middle_Distal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Pinky_Proximal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Pinky_Proximal/Finger_R_Pinky_Intermediate
         weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Pinky_Proximal/Finger_R_Pinky_Intermediate/Finger_R_Pinky_Distal
+        weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Ring_Proximal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Ring_Proximal/Finger_R_Ring_Intermediate
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Ring_Proximal/Finger_R_Ring_Intermediate/Finger_R_Ring_Distal
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Hand_R/Finger_R_Thumb_Proximal
         weight: 1
@@ -156,7 +193,23 @@ ModelImporter:
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Lower_Arm_R_twist_00
         weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Sleeve_Bell_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Sleeve_Bell_R_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Sleeve_Bell_R_02
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Lower_Arm_R/Sleeve_Bell_R_03
+        weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Clavicle_R/Upper_Arm_R/Upper_Arm_R_twist_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Manteau_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Manteau_L_00/Manteau_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Manteau_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Manteau_R_00/Manteau_R_01
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck
         weight: 1
@@ -168,7 +221,71 @@ ModelImporter:
         weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Face_BlendShapes
         weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_DownTwinTail_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_DownTwinTail_L_00/Hair_DownTwinTail_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_DownTwinTail_L_00/Hair_DownTwinTail_L_01/Hair_DownTwinTail_L_02
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_DownTwinTail_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_DownTwinTail_R_00/Hair_DownTwinTail_R_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_DownTwinTail_R_00/Hair_DownTwinTail_R_01/Hair_DownTwinTail_R_02
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Front_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Front_00/Hair_Front_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Ribbon_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Ribbon_L_00/Hair_Ribbon_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Ribbon_L_00/Hair_Ribbon_L_01/Hair_Ribbon_L_02
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Ribbon_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Ribbon_R_00/Hair_Ribbon_R_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Ribbon_R_00/Hair_Ribbon_R_01/Hair_Ribbon_R_02
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Side_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Side_L_00/Hair_Side_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Side_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Hair_Side_R_00/Hair_Side_R_01
+        weight: 1
       - path: Root/center/Hips/Spine/Chest/Upper_Chest/Neck/Head/Jaw
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Back_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Back_L_00/Skirt_Back_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Back_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Back_R_00/Skirt_Back_R_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Center_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Center_00/Skirt_Center_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Front_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Front_L_00/Skirt_Front_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Front_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Front_R_00/Skirt_Front_R_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Side_L_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Side_L_00/Skirt_Side_L_01
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Side_R_00
+        weight: 1
+      - path: Root/center/Hips/Spine/Skirt_Side_R_00/Skirt_Side_R_01
         weight: 1
       - path: Root/center/Hips/Upper_Leg_L
         weight: 1
@@ -177,6 +294,8 @@ ModelImporter:
       - path: Root/center/Hips/Upper_Leg_L/Lower_Leg_L/Foot_L
         weight: 1
       - path: Root/center/Hips/Upper_Leg_L/Lower_Leg_L/Foot_L/Toes_L
+        weight: 1
+      - path: Root/center/Hips/Upper_Leg_L/Lower_Leg_L/Knee_L
         weight: 1
       - path: Root/center/Hips/Upper_Leg_L/Lower_Leg_L/Lower_Leg_L_Twist_00
         weight: 1
@@ -190,11 +309,13 @@ ModelImporter:
         weight: 1
       - path: Root/center/Hips/Upper_Leg_R/Lower_Leg_R/Foot_R/Toes_R
         weight: 1
+      - path: Root/center/Hips/Upper_Leg_R/Lower_Leg_R/Knee_R
+        weight: 1
       - path: Root/center/Hips/Upper_Leg_R/Lower_Leg_R/Lower_Leg_R_Twist_00
         weight: 1
       - path: Root/center/Hips/Upper_Leg_R/Upper_Leg_R_Twist_00
         weight: 1
-      maskType: 1
+      maskType: 0
       maskSource: {fileID: 101100000, guid: 457fa94621a1e6f469ad75beb836d5fd, type: 2}
       additiveReferencePoseFrame: 0
     isReadable: 0
@@ -209,7 +330,6 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
