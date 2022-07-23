@@ -25,7 +25,9 @@
 
 ***
 
+## [(Link) 개발 리스트 정리 시트](https://docs.google.com/spreadsheets/d/1pZK6LebXEwzqyYYv5XKRE6p39oa6tqng-rD58605BSY/edit?usp=sharing)
 
+***
 
 ## 게임 소개
 
