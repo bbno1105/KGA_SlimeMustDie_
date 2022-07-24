@@ -9,13 +9,16 @@ public class PlayerControl : MonoBehaviour
     [Header("캐릭터")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform character;
+    Rigidbody rigid;
     Animator anim;
     // TODO : 나중에 Animator.StringToHash 로 최적화하기
 
 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
-    float blendSpeed;
+    [SerializeField] private float jumpPower;
+    float moveblendSpeed;
+    float jumpblendSpeed;
 
     [Header("카메라")]
     [SerializeField] private Transform camArm;
@@ -27,12 +30,11 @@ public class PlayerControl : MonoBehaviour
         PInfo.SetHP(_HP);
         PInfo.SetAttackPower(_AttackPower);
         PInfo.SetMoveSpeed(_MoveSpeed);
-
-        
     }
 
     void Start()
     {
+        rigid = player.gameObject.GetComponent<Rigidbody>();
         anim = character.gameObject.GetComponent<Animator>();
     }
 
@@ -64,6 +66,12 @@ public class PlayerControl : MonoBehaviour
         {
             PInfo.SetRunState(false);
         }
+
+        if(Input.GetKeyDown(KeyCode.Space) && !PInfo.IsJump)
+        {
+            PInfo.SetJumpState(true);
+            Jump();
+        }
     }
 
     void SetState()
@@ -92,45 +100,55 @@ public class PlayerControl : MonoBehaviour
         player.transform.position += moveDir * Time.deltaTime * PInfo.MoveSpeed;
     }
 
+    void Jump()
+    {
+        rigid.velocity = Vector3.up * jumpPower;
+        anim.SetTrigger("Jump");
+    }
+
+
+
     void SetAnimation()
     {
         switch (PInfo.State)
         {
             case CharacterInfo.STATE.IDLE:
-                if (blendSpeed > 0)
                 {
-                    blendSpeed -= 2f * Time.deltaTime;
-                }
-                else
-                {
-                    blendSpeed = 0;
+                    if (moveblendSpeed > 0)
+                    {
+                        moveblendSpeed -= 2f * Time.deltaTime;
+                    }
+                    else
+                    {
+                        moveblendSpeed = 0;
+                    }
                 }
                 break;
             case CharacterInfo.STATE.MOVE:
                 if(PInfo.IsRun)
                 {
-                    if (blendSpeed < 1f)
+                    if (moveblendSpeed < 1f)
                     {
-                        blendSpeed += Time.deltaTime;
+                        moveblendSpeed += Time.deltaTime;
                     }
                     else
                     {
-                        blendSpeed = 1f;
+                        moveblendSpeed = 1f;
                     }
                 }
                 else
                 {
-                    if (blendSpeed < 0.4f)
+                    if (moveblendSpeed < 0.4f)
                     {
-                        blendSpeed += Time.deltaTime;
+                        moveblendSpeed += Time.deltaTime;
                     }
-                    else if (blendSpeed > 0.6f)
+                    else if (moveblendSpeed > 0.6f)
                     {
-                        blendSpeed -= Time.deltaTime;
+                        moveblendSpeed -= Time.deltaTime;
                     }
                     else
                     {
-                        blendSpeed = 0.5f;
+                        moveblendSpeed = 0.5f;
                     }
                 }
                 break;
@@ -139,7 +157,51 @@ public class PlayerControl : MonoBehaviour
             default:
                 break;
         }
-        anim.SetFloat("Blend", blendSpeed);
+
+        if(rigid.velocity.y > 1)
+        {
+            if (jumpblendSpeed < -0.5f)
+            {
+                jumpblendSpeed += Time.deltaTime;
+            }
+            else
+            {
+                jumpblendSpeed = -0.5f;
+            }
+        }
+        else if (rigid.velocity.y > 0)
+        {
+            if(jumpblendSpeed < 0)
+            {
+                jumpblendSpeed += Time.deltaTime;
+            }
+            else
+            {
+                jumpblendSpeed = 0;
+            }
+        }
+        else if (rigid.velocity.y < -1)
+        {
+            if(jumpblendSpeed < 1f)
+            {
+                jumpblendSpeed += Time.deltaTime;
+            }
+            else
+            {
+                jumpblendSpeed = 1f;
+            }
+        }
+
+        if(PInfo.IsJump)
+        {
+            anim.SetFloat("JumpBlend", jumpblendSpeed);
+        }
+        else
+        {
+            anim.SetFloat("MoveBlend", moveblendSpeed);
+        }
+
+        anim.SetBool("isJump", PInfo.IsJump);
         anim.SetBool("isAttack", PInfo.IsAttack);
     }
 }

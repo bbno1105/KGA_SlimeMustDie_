@@ -10,4 +10,12 @@ public class PlayerInfo : CharacterInfo
 
     public bool IsJump { get; private set; }
     public void SetJumpState(bool _isJump) { this.IsJump = _isJump; }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            this.IsJump = false;
+        }
+    }
 }

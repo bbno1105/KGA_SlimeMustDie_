@@ -1,6 +1,6 @@
 ﻿//UCTS_Outline.cginc
 //Unitychan Toon Shader ver.2.0
-//v.2.0.6
+//v.2.0.9
 //nobuyuki@unity3d.com
 //https://github.com/unity3d-jp/UnityChanToonShaderVer2_Project
 //(C)Unity Technologies Japan/UCL
@@ -14,6 +14,10 @@
 //
             uniform float4 _LightColor0;
             uniform float4 _BaseColor;
+            //v.2.0.7.5
+            uniform float _Unlit_Intensity;
+            uniform fixed _Is_Filter_LightColor;
+            uniform fixed _Is_LightColor_Outline;
             //v.2.0.5
             uniform float4 _Color;
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
@@ -23,7 +27,6 @@
             uniform sampler2D _Outline_Sampler; uniform float4 _Outline_Sampler_ST;
             uniform float4 _Outline_Color;
             uniform fixed _Is_BlendBaseColor;
-            uniform fixed _Is_LightColor_Base;
             uniform float _Offset_Z;
             //v2.0.4
             uniform sampler2D _OutlineTex; uniform float4 _OutlineTex_ST;
@@ -44,6 +47,8 @@
                 float3 normal : NORMAL;
                 float4 tangent : TANGENT;
                 float2 texcoord0 : TEXCOORD0;
+                // v.2.0.9
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
             struct VertexOutput {
                 float4 pos : SV_POSITION;
@@ -51,12 +56,17 @@
                 float3 normalDir : TEXCOORD1;
                 float3 tangentDir : TEXCOORD2;
                 float3 bitangentDir : TEXCOORD3;
+                // v.2.0.9
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
             };
             VertexOutput vert (VertexInput v) {
                 VertexOutput o = (VertexOutput)0;
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 o.uv0 = v.texcoord0;
                 float4 objPos = mul ( unity_ObjectToWorld, float4(0,0,0,1) );
-                //float3 lightColor = _LightColor0.rgb;
                 float2 Set_UV0 = o.uv0;
                 float4 _Outline_Sampler_var = tex2Dlod(_Outline_Sampler,float4(TRANSFORM_TEX(Set_UV0, _Outline_Sampler),0.0,0));
                 //v.2.0.4.3 baked Normal Texture for Outline
@@ -69,40 +79,54 @@
                 float3 _BakedNormalDir = normalize(mul(_BakedNormal_var.rgb, tangentTransform));
                 //ここまで.
                 float Set_Outline_Width = (_Outline_Width*0.001*smoothstep( _Farthest_Distance, _Nearest_Distance, distance(objPos.rgb,_WorldSpaceCameraPos) )*_Outline_Sampler_var.rgb).r;
-                //v.2.0.4.2 for VRChat mirror object without normalize()
-                float3 viewDirection = _WorldSpaceCameraPos.xyz - o.pos.xyz;
-                float4 viewDirectionVP = mul(UNITY_MATRIX_VP, float4(viewDirection.xyz, 1));
-                //v.2.0.4.2
-                _Offset_Z = _Offset_Z * -0.01;
+                //v.2.0.7.5
+                float4 _ClipCameraPos = mul(UNITY_MATRIX_VP, float4(_WorldSpaceCameraPos.xyz, 1));
+                //v.2.0.7
+                #if defined(UNITY_REVERSED_Z)
+                    //v.2.0.4.2 (DX)
+                    _Offset_Z = _Offset_Z * -0.01;
+                #else
+                    //OpenGL
+                    _Offset_Z = _Offset_Z * 0.01;
+                #endif
 //v2.0.4
 #ifdef _OUTLINE_NML
-                //v.2.0.4.3 baked Normal Texture for Outline                
+                //v.2.0.4.3 baked Normal Texture for Outline
                 o.pos = UnityObjectToClipPos(lerp(float4(v.vertex.xyz + v.normal*Set_Outline_Width,1), float4(v.vertex.xyz + _BakedNormalDir*Set_Outline_Width,1),_Is_BakedNormal));
 #elif _OUTLINE_POS
                 Set_Outline_Width = Set_Outline_Width*2;
                 float signVar = dot(normalize(v.vertex),normalize(v.normal))<0 ? -1 : 1;
                 o.pos = UnityObjectToClipPos(float4(v.vertex.xyz + signVar*normalize(v.vertex)*Set_Outline_Width, 1));
 #endif
-                o.pos.z = o.pos.z + _Offset_Z*viewDirectionVP.z;
+                //v.2.0.7.5
+                o.pos.z = o.pos.z + _Offset_Z * _ClipCameraPos.z;
                 return o;
             }
             float4 frag(VertexOutput i) : SV_Target{
+                UNITY_SETUP_INSTANCE_ID(i);
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
                 //v.2.0.5
                 _Color = _BaseColor;
                 float4 objPos = mul ( unity_ObjectToWorld, float4(0,0,0,1) );
-                //float3 lightColor = _LightColor0.rgb;
+                //v.2.0.9
+                float3 envLightSource_GradientEquator = unity_AmbientEquator.rgb >0.05 ? unity_AmbientEquator.rgb : half3(0.05,0.05,0.05);
+                float3 envLightSource_SkyboxIntensity = max(ShadeSH9(half4(0.0,0.0,0.0,1.0)),ShadeSH9(half4(0.0,-1.0,0.0,1.0))).rgb;
+                float3 ambientSkyColor = envLightSource_SkyboxIntensity.rgb>0.0 ? envLightSource_SkyboxIntensity*_Unlit_Intensity : envLightSource_GradientEquator*_Unlit_Intensity;
+                //
+                float3 lightColor = _LightColor0.rgb >0.05 ? _LightColor0.rgb : ambientSkyColor.rgb;
+                float lightColorIntensity = (0.299*lightColor.r + 0.587*lightColor.g + 0.114*lightColor.b);
+                lightColor = lightColorIntensity<1 ? lightColor : lightColor/lightColorIntensity;
+                lightColor = lerp(half3(1.0,1.0,1.0), lightColor, _Is_LightColor_Outline);
                 float2 Set_UV0 = i.uv0;
                 float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(Set_UV0, _MainTex));
-                float3 _BaseColorMap_var = (_BaseColor.rgb*_MainTex_var.rgb);
-                //v.2.0.5
-                float3 Set_BaseColor = lerp( _BaseColorMap_var, (_BaseColorMap_var*saturate(_LightColor0.rgb)), _Is_LightColor_Base );
-                //v.2.0.4
-                float3 _Is_BlendBaseColor_var = lerp( _Outline_Color.rgb, (_Outline_Color.rgb*Set_BaseColor*Set_BaseColor), _Is_BlendBaseColor );
+                float3 Set_BaseColor = _BaseColor.rgb*_MainTex_var.rgb;
+                float3 _Is_BlendBaseColor_var = lerp( _Outline_Color.rgb*lightColor, (_Outline_Color.rgb*Set_BaseColor*Set_BaseColor*lightColor), _Is_BlendBaseColor );
+                //
                 float3 _OutlineTex_var = tex2D(_OutlineTex,TRANSFORM_TEX(Set_UV0, _OutlineTex));
-//v.2.0.4
+//v.2.0.7.5
 #ifdef _IS_OUTLINE_CLIPPING_NO
-                float3 Set_Outline_Color = lerp(_Is_BlendBaseColor_var, _OutlineTex_var.rgb*_Is_BlendBaseColor_var, _Is_OutlineTex );
-                return fixed4(Set_Outline_Color,1.0);
+                float3 Set_Outline_Color = lerp(_Is_BlendBaseColor_var, _OutlineTex_var.rgb*_Outline_Color.rgb*lightColor, _Is_OutlineTex );
+                return float4(Set_Outline_Color,1.0);
 #elif _IS_OUTLINE_CLIPPING_YES
                 float4 _ClippingMask_var = tex2D(_ClippingMask,TRANSFORM_TEX(Set_UV0, _ClippingMask));
                 float Set_MainTexAlpha = _MainTex_var.a;
@@ -110,7 +134,7 @@
                 float _Inverse_Clipping_var = lerp( _IsBaseMapAlphaAsClippingMask_var, (1.0 - _IsBaseMapAlphaAsClippingMask_var), _Inverse_Clipping );
                 float Set_Clipping = saturate((_Inverse_Clipping_var+_Clipping_Level));
                 clip(Set_Clipping - 0.5);
-                float4 Set_Outline_Color = lerp( float4(_Is_BlendBaseColor_var,Set_Clipping), float4((_OutlineTex_var.rgb*_Is_BlendBaseColor_var),Set_Clipping), _Is_OutlineTex );
+                float4 Set_Outline_Color = lerp( float4(_Is_BlendBaseColor_var,Set_Clipping), float4((_OutlineTex_var.rgb*_Outline_Color.rgb*lightColor),Set_Clipping), _Is_OutlineTex );
                 return Set_Outline_Color;
 #endif
             }

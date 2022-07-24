@@ -2,17 +2,31 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FaceSkin_00_00
   m_Shader: {fileID: 4800000, guid: af8454e09b3a41448a4140e792059446, type: 3}
-  m_ShaderKeywords: _INVERSE_Z_AXIS_BLD_ON _IS_BLENDADDTOMATCAP_ON _IS_FILTER_HICUTPOINTLIGHTCOLOR_ON
-    _IS_LIGHTCOLOR_1ST_SHADE_ON _IS_LIGHTCOLOR_2ND_SHADE_ON _IS_LIGHTCOLOR_AP_RIMLIGHT_ON
-    _IS_LIGHTCOLOR_BASE_ON _IS_LIGHTCOLOR_HIGHCOLOR_ON _IS_LIGHTCOLOR_MATCAP_ON _OUTLINE_NML
-    _RIMLIGHT_ON _SET_SYSTEMSHADOWSTOBASE_ON _USE_1STAS2ND_ON _USE_BASEAS1ST_ON
+  m_ValidKeywords:
+  - _EMISSIVE_SIMPLE
+  m_InvalidKeywords:
+  - _
+  - _INVERSE_Z_AXIS_BLD_ON
+  - _IS_BLENDADDTOMATCAP_ON
+  - _IS_FILTER_HICUTPOINTLIGHTCOLOR_ON
+  - _IS_LIGHTCOLOR_1ST_SHADE_ON
+  - _IS_LIGHTCOLOR_2ND_SHADE_ON
+  - _IS_LIGHTCOLOR_AP_RIMLIGHT_ON
+  - _IS_LIGHTCOLOR_BASE_ON
+  - _IS_LIGHTCOLOR_HIGHCOLOR_ON
+  - _IS_LIGHTCOLOR_MATCAP_ON
+  - _OUTLINE_NML
+  - _RIMLIGHT_ON
+  - _SET_SYSTEMSHADOWSTOBASE_ON
+  - _USE_1STAS2ND_ON
+  - _USE_BASEAS1ST_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -31,6 +45,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BakedNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -134,6 +152,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _1st2nd_Shades_Feather: 0.232
     - _1st_ShadeColor_Feather: 0.777
@@ -145,16 +164,19 @@ Material:
     - _Ap_RimLight_Power: 0.123
     - _BaseColor_Step: 0.407
     - _BaseShade_Feather: 0.777
+    - _Base_Speed: 0
     - _BlurLevelMatcap: 0
     - _BlurLevelSGM: 0
     - _BumpScale: 1
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
     - _Clipping_Level: 0
+    - _ColorShift_Speed: 0
     - _CullMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EMISSIVE: 0
     - _Farthest_Distance: 100
     - _GI_Intensity: 0
     - _Glossiness: 0.5
@@ -168,6 +190,7 @@ Material:
     - _Is_BlendAddToHiColor: 0
     - _Is_BlendAddToMatCap: 1
     - _Is_BlendBaseColor: 0
+    - _Is_ColorShift: 0
     - _Is_Filter_HiCutPointLightColor: 1
     - _Is_Filter_LightColor: 0
     - _Is_LightColor_1st_Shade: 1
@@ -183,9 +206,12 @@ Material:
     - _Is_NormalMapToRimLight: 0
     - _Is_Ortho: 0
     - _Is_OutlineTex: 0
+    - _Is_PingPong_Base: 0
     - _Is_SpecularToHighColor: 0
     - _Is_UseTweakHighColorOnShadow: 0
     - _Is_UseTweakMatCapOnShadow: 0
+    - _Is_ViewCoord_Scroll: 0
+    - _Is_ViewShift: 0
     - _LightDirection_MaskOn: 0
     - _MatCap: 0
     - _Metallic: 0
@@ -202,8 +228,11 @@ Material:
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
     - _RimLight_Power: 0.114
+    - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
+    - _Scroll_EmissiveU: 0
+    - _Scroll_EmissiveV: 0
     - _Set_SystemShadowsToBase: 1
     - _ShadeColor_Step: 0.153
     - _SrcBlend: 1
@@ -232,6 +261,7 @@ Material:
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 1}
+    - _ColorShift: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
@@ -239,4 +269,5 @@ Material:
     - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _RimLightColor: {r: 0.3301887, g: 0.061885547, b: 0, a: 1}
     - _ShadowColor: {r: 0.86774653, g: 0.86774653, b: 0.9433962, a: 1}
+    - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
