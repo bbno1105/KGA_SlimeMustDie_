@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public bool IsTrapOn { get; private set; }
+    [field : SerializeField] public bool IsTrapOn { get; private set; }
 
     public void SetTrap()
     {

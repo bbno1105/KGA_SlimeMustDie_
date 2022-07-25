@@ -23,6 +23,8 @@ public class TrapCreator : MonoBehaviour
 
     void select()
     {
+        
+
         // TODO : 나중에 수정할 코드
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -41,13 +43,14 @@ public class TrapCreator : MonoBehaviour
         }
 
         if (PlayerTraps == null) return;
+        if (PlayerTraps) PlayerTraps.SetActive(camerAim.isTarget);
 
         PlayerTraps.transform.position = new Vector3(this.SelectEffect.transform.position.x, PlayerTraps.transform.position.y, this.SelectEffect.transform.position.z);
     }
 
     void SetSelectEffect()
     {
-        if (camerAim.isTarget)
+        if (camerAim.isTarget && PlayerTraps != null)
         {
             SelectEffect.SetActive(true);
             SelectEffect.transform.position = new Vector3(camerAim.hitPos.x, SelectEffect.transform.position.y, camerAim.hitPos.z);
@@ -72,9 +75,8 @@ public class TrapCreator : MonoBehaviour
 
     void Create()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && camerAim.isTarget)
         {
-
             Block targetBlock = camerAim.hitObject.GetComponent<Block>();
             if (!camerAim.IsTrapOn && targetBlock != null && PlayerTraps != null)
             {

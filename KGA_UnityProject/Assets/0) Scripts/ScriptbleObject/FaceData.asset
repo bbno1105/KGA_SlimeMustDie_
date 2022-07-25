@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf1dece221e78a489f2be356f9bdcdc, type: 3}
+  m_Name: FaceData
+  m_EditorClassIdentifier: 
+  NormalFace:
+  - {fileID: 2800000, guid: 0b5ce16697d54f24682f756804c2e3b8, type: 3}
+  - {fileID: 2800000, guid: a00995dc30c318841ba1ea305cec76f0, type: 3}
+  - {fileID: 2800000, guid: eeef778cf86310448a95e28a90f5252a, type: 3}
+  - {fileID: 2800000, guid: 010b8b4e26071d94aba57d64fd3d398f, type: 3}
+  - {fileID: 2800000, guid: cf0e145f0c126ae4e99e1961f8bdbcea, type: 3}
+  - {fileID: 2800000, guid: 68801c076f2988e4080fd3a709b54404, type: 3}
+  attackFace: {fileID: 2800000, guid: 809e8ef1ca7297e4a9271c398ee57e8a, type: 3}
+  damageFace: {fileID: 2800000, guid: 592fc9f53ab21444eb5ffb8556bb0bf1, type: 3}

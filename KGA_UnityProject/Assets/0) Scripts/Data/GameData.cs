@@ -22,6 +22,7 @@ public class GameData : SingletonMonoBehaviour<GameData> // 싱글톤 바꾸기
         if(Player == null)
         {
             Player = new PlayerData();
+            Player.Initialize();
         }
 
         // 게임 데이터 불러오기

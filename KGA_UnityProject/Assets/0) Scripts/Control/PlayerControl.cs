@@ -106,9 +106,24 @@ public class PlayerControl : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
-
-
     void SetAnimation()
+    {
+        if (PInfo.IsJump)
+        {
+            JumpBlendAnition();
+            anim.SetFloat("JumpBlend", jumpblendSpeed);
+        }
+        else
+        {
+            MoveBlendAnition();
+            anim.SetFloat("MoveBlend", moveblendSpeed);
+        }
+
+        anim.SetBool("isJump", PInfo.IsJump);
+        anim.SetBool("isAttack", PInfo.IsAttack);
+    }
+
+    void MoveBlendAnition()
     {
         switch (PInfo.State)
         {
@@ -125,7 +140,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 break;
             case CharacterInfo.STATE.MOVE:
-                if(PInfo.IsRun)
+                if (PInfo.IsRun)
                 {
                     if (moveblendSpeed < 1f)
                     {
@@ -152,13 +167,14 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
                 break;
-            case CharacterInfo.STATE.DIE:
-                break;
             default:
                 break;
         }
+    }
 
-        if(rigid.velocity.y > 1)
+    void JumpBlendAnition()
+    {
+        if (rigid.velocity.y > 1)
         {
             if (jumpblendSpeed < -0.5f)
             {
@@ -171,7 +187,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if (rigid.velocity.y > 0)
         {
-            if(jumpblendSpeed < 0)
+            if (jumpblendSpeed < 0)
             {
                 jumpblendSpeed += Time.deltaTime;
             }
@@ -182,7 +198,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if (rigid.velocity.y < -1)
         {
-            if(jumpblendSpeed < 1f)
+            if (jumpblendSpeed < 1f)
             {
                 jumpblendSpeed += Time.deltaTime;
             }
@@ -191,17 +207,5 @@ public class PlayerControl : MonoBehaviour
                 jumpblendSpeed = 1f;
             }
         }
-
-        if(PInfo.IsJump)
-        {
-            anim.SetFloat("JumpBlend", jumpblendSpeed);
-        }
-        else
-        {
-            anim.SetFloat("MoveBlend", moveblendSpeed);
-        }
-
-        anim.SetBool("isJump", PInfo.IsJump);
-        anim.SetBool("isAttack", PInfo.IsAttack);
     }
 }
