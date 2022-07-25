@@ -106,6 +106,19 @@ public class PlayerControl : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
+    public void Attack(bool _isAttack)
+    {
+        PInfo.GetComponent<BoxCollider>().gameObject.SetActive(_isAttack);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Monster")
+        {
+            other.GetComponent<Monster>().DamagedHP(PInfo.AttackPower);
+        }
+    }
+
     void SetAnimation()
     {
         if (PInfo.IsJump)

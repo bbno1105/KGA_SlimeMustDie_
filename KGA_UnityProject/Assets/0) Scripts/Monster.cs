@@ -46,6 +46,7 @@ public class Monster : CharacterInfo
                 Move();
                 break;
             case STATE.DIE:
+                Die();
                 break;
             default:
                 break;
@@ -89,11 +90,10 @@ public class Monster : CharacterInfo
 
     void Die()
     {
-        if(HP <= 0)
-        {
-            SetFace(face.damageFace);
-            this.SetState(STATE.DIE);
-        }
+        SetFace(face.damageFace);
+        this.SetState(STATE.DIE);
+
+        animator.SetTrigger("Die");
     }
 
     void SetFace(Texture _texture)
