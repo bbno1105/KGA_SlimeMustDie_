@@ -31,6 +31,8 @@ public class Monster : CharacterInfo
     bool isAttack;
     GameObject target;
 
+    public float speed;
+
     void Start()
     {
         anim = this.transform.GetComponent<Animator>();
@@ -41,6 +43,8 @@ public class Monster : CharacterInfo
         HPBar = this.transform.GetChild(2).gameObject;
 
         Initialized();
+
+        speed = anim.speed;
     }
 
     private void Initialized()
@@ -56,6 +60,7 @@ public class Monster : CharacterInfo
         if(this.State != STATE.DIE)
         {
             Move();
+            anim.speed = speed;
         }
     }
 

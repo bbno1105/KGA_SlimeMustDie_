@@ -16,15 +16,16 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         time += Time.deltaTime;
         if(time > spawnTime)
         {
-            CreateMonster();
+            int rand = Random.Range(0, 4);
+            CreateMonster(0,rand);
             time = 0;
         }
     }
 
-    void CreateMonster()
+    void CreateMonster(int stage, int monster)
     {
         // 일 단 한 마 리 만
-        Instantiate(MonsterPrefabs[0], stageInfo[0].StartPOS.transform);
+        Instantiate(MonsterPrefabs[monster], stageInfo[stage].StartPOS.transform);
     }
 
     

@@ -204,8 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adc5e7e806b38346bce50c2d85812b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  slider: {fileID: 0}
 --- !u!1 &1853452484765506116
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +235,7 @@ Transform:
   - {fileID: 4295551423826383861}
   m_Father: {fileID: 8993603566554055645}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0.13083172, y: 0.00014394341, z: 11.9281435}
+  m_LocalEulerAnglesHint: {x: -24.110716, y: -0.057348505, z: 12.19805}
 --- !u!1 &1952739901694944337
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5472165668445287724}
   m_LocalRotation: {x: 0.7071068, y: -0.00000008429372, z: -0.0000000842937, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -466,7 +464,7 @@ Transform:
   - {fileID: 8331470522872954402}
   m_Father: {fileID: 7625824445407367461}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 89.98021, y: -0.000013657457, z: 0}
+  m_LocalEulerAnglesHint: {x: 82.746735, y: -0.00011471748, z: -0.00011672286}
 --- !u!1 &5961917832403913375
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,8 +623,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: 0, y: 0.27, z: 0}
+  m_Radius: 0.29
+  m_Center: {x: 0, y: 0.26, z: 0}
 --- !u!136 &727591876930668803
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -637,7 +635,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
@@ -686,7 +684,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6705402075998324148}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.33
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
@@ -711,12 +709,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123aaf47dd6a75f4a9b07ede5af39dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHP>k__BackingField: 0
-  <HP>k__BackingField: 100
+  <MaxHP>k__BackingField: 100
+  <HP>k__BackingField: 0
   <AttackPower>k__BackingField: 10
   <MoveSpeed>k__BackingField: 3
   face: {fileID: 11400000, guid: b8e03b07375dddf44955400b6591d46e, type: 2}
   navAgent: {fileID: 5355374395839381733}
+  speed: 0
 --- !u!1 &7534262480104691789
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +747,7 @@ Transform:
   - {fileID: 6099005710090621285}
   m_Father: {fileID: 8993603566554055645}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0.14732742, y: -0.00015528349, z: -11.917795}
+  m_LocalEulerAnglesHint: {x: -11.468008, y: 0.07342199, z: -12.410994}
 --- !u!1 &8414972406771447875
 GameObject:
   m_ObjectHideFlags: 0
