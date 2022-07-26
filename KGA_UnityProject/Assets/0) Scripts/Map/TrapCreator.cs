@@ -23,8 +23,6 @@ public class TrapCreator : MonoBehaviour
 
     void select()
     {
-        
-
         // TODO : 나중에 수정할 코드
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

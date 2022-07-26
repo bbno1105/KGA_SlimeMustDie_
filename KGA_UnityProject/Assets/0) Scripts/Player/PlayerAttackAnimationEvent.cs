@@ -35,7 +35,11 @@ public class PlayerAttackAnimationEvent : MonoBehaviour
     {
         if (other.tag == "Monster")
         {
-            other.GetComponent<Monster>().DamagedHP(AttackPower);
+            Monster monster = other.GetComponent<Monster>();
+            if(monster.State != CharacterInfo.STATE.DIE)
+            {
+                monster.DamagedHP(AttackPower);
+            }
         }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterInfo : MonoBehaviour
 {
+    [field: SerializeField] public int MaxHP { get; protected set; }
+    public void SetMaxHP(int _MaxHP) { this.MaxHP = _MaxHP; }
+
     [field : SerializeField] public int HP { get; protected set; }
     public void SetHP(int _HP) { this.HP = _HP; }
 
@@ -17,6 +20,7 @@ public class CharacterInfo : MonoBehaviour
     {
         IDLE,
         MOVE,
+        Attack,
         DIE
     }
     public STATE State { get; protected set; }
