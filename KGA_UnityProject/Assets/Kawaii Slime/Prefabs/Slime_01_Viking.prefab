@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 2733002504113646328}
   m_Layer: 0
   m_Name: Slime_01_Viking
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

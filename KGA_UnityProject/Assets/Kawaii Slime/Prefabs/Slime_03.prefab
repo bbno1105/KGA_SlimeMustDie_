@@ -120,7 +120,7 @@ Transform:
   - {fileID: 3690983180217553933}
   m_Father: {fileID: 8388638392806753317}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 6.0652676, y: 0.0014629577, z: 11.95342}
+  m_LocalEulerAnglesHint: {x: 4.4270973, y: 0.00071248924, z: 11.937793}
 --- !u!1 &4083056443832528022
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ Transform:
   - {fileID: 8879559883992447450}
   m_Father: {fileID: 7021536270432622301}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 89.98022, y: -0.000014108662, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.9802, y: -0.000013206203, z: 0}
 --- !u!1 &6173172085731050060
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 4720789915656806516}
   m_Layer: 0
   m_Name: Slime_03
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,7 +332,7 @@ Transform:
   - {fileID: 6629819297798592157}
   m_Father: {fileID: 8388638392806753317}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 6.829824, y: -0.0020651016, z: -11.954085}
+  m_LocalEulerAnglesHint: {x: 4.9848833, y: 0.0006466105, z: -11.924922}
 --- !u!1 &8962761626986233787
 GameObject:
   m_ObjectHideFlags: 0

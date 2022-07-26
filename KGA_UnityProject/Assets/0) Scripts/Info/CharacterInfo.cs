@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class CharacterInfo : MonoBehaviour
 {
-    [field : SerializeField] public int HP { get; private set; }
+    [field : SerializeField] public int HP { get; protected set; }
     public void SetHP(int _HP) { this.HP = _HP; }
-    public void DamagedHP(float _damage)
-    {
-        this.HP -= (int)_damage;
-        if(this.HP <= 0)
-        {
-            this.SetState(STATE.DIE);
-        }
-    }
 
-    [field: SerializeField] public float AttackPower { get; private set; }
+    [field: SerializeField] public float AttackPower { get; protected set; }
     public void SetAttackPower(float _AttackPower) { this.AttackPower = _AttackPower; }
 
-    [field: SerializeField] public float MoveSpeed { get; private set; }
+    [field: SerializeField] public float MoveSpeed { get; protected set; }
     public void SetMoveSpeed(float _MoveSpeed) { this.MoveSpeed = _MoveSpeed;  }
 
     public enum STATE
@@ -27,9 +19,9 @@ public class CharacterInfo : MonoBehaviour
         MOVE,
         DIE
     }
-    public STATE State { get; private set; }
+    public STATE State { get; protected set; }
     public void SetState(STATE _state) { this.State = _state; }
 
-    public bool IsAttack { get; private set; }
+    public bool IsAttack { get; protected set; }
     public void SetAttackState(bool _isAttack) { this.IsAttack = _isAttack; }
 }

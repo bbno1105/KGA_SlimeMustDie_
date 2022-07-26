@@ -22,38 +22,34 @@ public class Monster : CharacterInfo
     [SerializeField] NavMeshAgent navAgent;
 
     Animator animator;
+    Rigidbody rigidbody;
+    SphereCollider collider;
     Material faceMaterial;
+    Material bodyMaterial;
 
     void Start()
     {
+        animator = this.transform.GetComponent<Animator>();
+        rigidbody = this.transform.GetComponent<Rigidbody>();
+        collider = this.transform.GetComponent<SphereCollider>();
+        bodyMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[0];
         faceMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[1];
-        animator = this.transform.GetComponentInChildren<Animator>();
+
+        Initialized();
+    }
+
+    private void Initialized()
+    {
         SetEndPos(StageControl.Instance.stageInfo[GameData.Player.nowStage].GoalPOS.transform);
         this.SetState(STATE.MOVE);
-
         normalFaceNum = Random.Range(0, face.NormalFace.Length);
-
     }
 
     void Update()
     {
-        switch (this.State)
-        {
-            case STATE.IDLE:
-                Idle();
-                break;
-            case STATE.MOVE:
-                Move();
-                break;
-            case STATE.DIE:
-                Die();
-                break;
-            default:
-                break;
-        }
-
         if(this.State != STATE.DIE)
         {
+            Move();
             // Attack();
         }
     }
@@ -88,12 +84,42 @@ public class Monster : CharacterInfo
         SetFace(face.attackFace);
     }
 
+    public void DamagedHP(float _damage)
+    {
+        this.HP -= (int)_damage;
+        animator.SetTrigger("Damaged");
+
+        StartCoroutine(DamageEffect());
+
+        if (this.HP <= 0)
+        {
+            Die();
+        }
+    }
+
+    IEnumerator DamageEffect()
+    {
+        Color defaultColor = bodyMaterial.color;
+        bodyMaterial.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+
+        bodyMaterial.color = defaultColor;
+    }
+
     void Die()
     {
         SetFace(face.damageFace);
         this.SetState(STATE.DIE);
 
-        animator.SetTrigger("Die");
+        this.rigidbody.velocity = Vector3.zero;
+        this.navAgent.Stop();
+        this.rigidbody.useGravity = false;
+        this.collider.enabled = false;
+
+        this.gameObject.tag = "Untagged";
+
+        animator.SetTrigger("Dead");
     }
 
     void SetFace(Texture _texture)
@@ -101,17 +127,16 @@ public class Monster : CharacterInfo
         faceMaterial.SetTexture("_MainTex", _texture);
     }
 
-    void SetAnimation()
-    {
-
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Goal")
         {
-            UnityEngine.Debug.Log("µé¾î¿È");
-            Destroy(this.gameObject);
+            DestroySlime();
         }
+    }
+
+    public void DestroySlime()
+    {
+        Destroy(this.gameObject);
     }
 }

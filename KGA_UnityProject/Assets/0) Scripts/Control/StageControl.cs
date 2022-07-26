@@ -5,15 +5,16 @@ using UnityEngine;
 public class StageControl : SingletonMonoBehaviour<StageControl>
 {
     public StageInfo[] stageInfo;
-
+    
     [SerializeField] GameObject[] MonsterPrefabs;
 
+    [SerializeField] float spawnTime;
     float time;
 
     void Update()
     {
         time += Time.deltaTime;
-        if(time > 1f)
+        if(time > spawnTime)
         {
             CreateMonster();
             time = 0;
