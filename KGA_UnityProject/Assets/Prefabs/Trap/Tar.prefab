@@ -110,12 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e275ce733565c049bba32e8e9aad2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolTime: 0
+  CoolTime: 1
   Cost: 0
+  isContinuousTrap: 1
+  CountinueTime: 0
   isDamageTrap: 0
   Damage: 0
+  DamageTime: 0
   isSlowTrap: 1
-  Slow: 0
+  SlowSpeed: 0.4
   isFreezeTrap: 0
   FreezeTime: 0
+  isRigidTrap: 0
+  addFource: 0
   isTrapOn: 0

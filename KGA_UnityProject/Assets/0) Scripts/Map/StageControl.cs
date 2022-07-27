@@ -14,6 +14,7 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
     void Update()
     {
         time += Time.deltaTime;
+        // TODO : 나중에 스테이지에 따라 나오게 해야할 듯
         if(time > spawnTime)
         {
             int rand = Random.Range(0, 4);
@@ -24,7 +25,6 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
 
     void CreateMonster(int stage, int monster)
     {
-        // 일 단 한 마 리 만
         Instantiate(MonsterPrefabs[monster], stageInfo[stage].StartPOS.transform);
     }
 

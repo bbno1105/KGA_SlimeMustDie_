@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e7e2edfec7f714380768aada955393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Level>k__BackingField: 0
   <StartPOS>k__BackingField: {fileID: 1985496783}
   <GoalPOS>k__BackingField: {fileID: 324519582}
 --- !u!4 &158118024 stripped
@@ -2100,6 +2101,9 @@ MonoBehaviour:
   <HP>k__BackingField: 100
   <AttackPower>k__BackingField: 50
   <MoveSpeed>k__BackingField: 0
+  <State>k__BackingField: 0
+  <IsRun>k__BackingField: 0
+  <IsJump>k__BackingField: 0
   rigid: {fileID: 0}
   anim: {fileID: 0}
   walkSpeed: 3

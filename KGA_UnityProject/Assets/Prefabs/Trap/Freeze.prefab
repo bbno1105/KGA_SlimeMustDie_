@@ -112,10 +112,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoolTime: 10
   Cost: 0
+  isContinuousTrap: 0
+  CountinueTime: 0
   isDamageTrap: 0
   Damage: 0
+  DamageTime: 0
   isSlowTrap: 0
   Slow: 0
   isFreezeTrap: 1
-  FreezeTime: 3
+  FreezeTime: 33
+  isRigidTrap: 0
+  addFource: 0
   isTrapOn: 0

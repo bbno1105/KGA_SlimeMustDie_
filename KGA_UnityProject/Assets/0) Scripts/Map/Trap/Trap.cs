@@ -8,22 +8,32 @@ public class Trap : MonoBehaviour
     Monster monster;
 
     public float CoolTime;
-    float nowTime = 0;
+    float nowCoolTime = 0;
 
     public float Cost;
 
+    public bool isContinuousTrap; // 무한 지속인가
+    public float CountinueTime; // 얼마나 지속할 것인가
+    float nowCountinueTime;
+
+    [Header("데미지 함정")]
     public bool isDamageTrap;
     public float Damage;
+    public float DamageTime; // 얼마에 1대 때릴 것인가
 
+    [Header("이속감소 함정")]
     public bool isSlowTrap;
-    public float Slow;
+    public float SlowSpeed;
 
+    [Header("빙결 함정")]
     public bool isFreezeTrap;
     public float FreezeTime;
 
-    public bool isTrapOn;
+    [Header("점프 함정")]
+    public bool isRigidTrap;
+    public float addFource; // 점프 힘
 
-    bool isRigidTrap;
+    public bool isTrapOn;
 
     Material material;
     Color defaultColor;
@@ -52,97 +62,52 @@ public class Trap : MonoBehaviour
                     target.RemoveAt(i);
                     continue;
                 }
-                ActiveTrap(target[i]);
+                TrapActivate(target[i]);
             }
-            isTrapOn = false;
-            nowTime = 0;
-            TrapEffectOn(false);
+
+            if (isContinuousTrap == false)
+            {
+                nowCountinueTime += 1 * Time.deltaTime;
+                if(CountinueTime < nowCountinueTime)
+                {
+                    nowCountinueTime = 0;
+                    isTrapOn = false;
+                }
+            }
         }
         else
         { 
-            nowTime += 1 * Time.deltaTime;
-            if(CoolTime <= nowTime)
+            nowCoolTime += 1 * Time.deltaTime;
+            if(CoolTime <= nowCoolTime)
             {
                 isTrapOn = true;
-                TrapEffectOn(true);
+                nowCoolTime = 0;
             }
         }
+
+        TrapRenderer(isTrapOn);
     }
 
-    void TrapEffectOn(bool _isTrapOn)
+    void TrapRenderer(bool _isTrapOn)
     {
-        if(_isTrapOn)
+        if(_isTrapOn) // 켜진상태 애니메이션
         {
             this.material.color = Color.white;
         }
-        else
+        else // 꺼진 상태 애니메이션
         {
             this.material.color = defaultColor;
         }
     }
 
-
-    void ActiveTrap(Collider _target)
-    {
-        if (_target.GetComponent<Monster>().State == CharacterInfo.STATE.DIE)
-        {
-            target.Remove(_target);
-            return;
-        }
-
-        if (isDamageTrap) DamageTrap(_target);
-        if (isSlowTrap) SlowTrap(_target);
-        if (isFreezeTrap) FreezeTrap(_target);
-
-        if (isRigidTrap)
-        {
-            Rigidbody rigid = _target.GetComponent<Rigidbody>();
-            //rigid.AddForce(.back * 1000f + Vector3.up * 300f);
-        }
-
-    }
-
-    public void DamageTrap(Collider _other)
-    {
-        monster = _other.GetComponent<Monster>();
-        monster.DamagedHP(Damage);
-    }
-
-    public void SlowTrap(Collider _other)
-    {
-        //anim = _other.GetComponent<Animator>();
-        //agent = _other.GetComponent<NavMeshAgent>();
-    }
-
-    public void FreezeTrap(Collider _other)
-    {
-        StartCoroutine(Freeze(_other));
-    }
-
-    IEnumerator Freeze(Collider _other)
-    {
-        NavMeshAgent agent = _other.GetComponent<NavMeshAgent>();
-        Animator anim = _other.GetComponent<Animator>();
-
-        agent.speed = 0;
-        anim.speed = 0;
-        _other.GetComponent<Monster>().SetState(CharacterInfo.STATE.IDLE);
-
-        yield return new WaitForSeconds(FreezeTime);
-
-        agent.speed = 1;
-        anim.speed = 1;
-        _other.GetComponent<Monster>().SetState(CharacterInfo.STATE.MOVE);
-
-    }
-
-
-
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Monster")
+        if (other.tag == "Monster")
         {
             target.Add(other);
+
+            // 지속 함정
+            if (isContinuousTrap) TrapPassive(true, other);
         }
     }
 
@@ -151,8 +116,63 @@ public class Trap : MonoBehaviour
         if (other.tag == "Monster")
         {
             target.Remove(other);
+
+            // 지속 함정
+            if(isContinuousTrap) TrapPassive(false, other);
         }
     }
 
+    void TrapActivate(Collider _target)
+    {
+        if (_target.GetComponent<Monster>().State == CharacterInfo.STATE.DIE)
+        {
+            target.Remove(_target);
+            return;
+        }
+
+        if (isDamageTrap) ActiveDamageTrap(_target);
+        if (isFreezeTrap) ActiveFreezeTrap(_target);
+        if (isRigidTrap) ActiveJumpTrap(_target);
+    }
+
+    void TrapPassive(bool _isOn, Collider _target)
+    {
+        if(_isOn)
+        {
+            PassiveSlowTrap(_isOn, _target);
+        }
+        else
+        {
+            PassiveSlowTrap(_isOn, _target);
+        }
+    }
+
+    // -----------------------------------------------------------------------------------[데미지 함정]
+    public void ActiveDamageTrap(Collider _other)
+    {
+        monster = _other.GetComponent<Monster>();
+        monster.DamagedHP(Damage);
+    }
+
+    // -----------------------------------------------------------------------------------[빙결 함정]
+    public void ActiveFreezeTrap(Collider _other)
+    {
+        monster = _other.GetComponent<Monster>();
+        monster.Freeze(FreezeTime);
+    }
+
+    // -----------------------------------------------------------------------------------[점프 함정]
+    public void ActiveJumpTrap(Collider _other)
+    {
+        Rigidbody rigid = _other.GetComponent<Rigidbody>();
+        rigid.AddForce(this.transform.forward * addFource + Vector3.up * addFource * 10);
+    }
+
+    // -----------------------------------------------------------------------------------[이속감소 함정]
+    public void PassiveSlowTrap(bool _isOn, Collider _other)
+    {
+        monster = _other.GetComponent<Monster>();
+        monster.Slow(_isOn,SlowSpeed);
+    }
 
 }

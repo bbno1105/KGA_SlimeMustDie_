@@ -30,8 +30,7 @@ public class Monster : CharacterInfo
 
     bool isAttack;
     GameObject target;
-
-    public float speed;
+    Color defaultColor;
 
     void Start()
     {
@@ -44,8 +43,6 @@ public class Monster : CharacterInfo
         HPBar = this.transform.GetChild(2).gameObject;
 
         Initialized();
-
-        speed = anim.speed;
     }
 
     private void Initialized()
@@ -54,6 +51,7 @@ public class Monster : CharacterInfo
         SetEndPos(StageControl.Instance.stageInfo[GameData.Player.nowStage].GoalPOS.transform);
         this.SetState(STATE.MOVE);
         normalFaceNum = Random.Range(0, face.NormalFace.Length);
+        defaultColor = bodyMaterial.color;
     }
 
     void Update()
@@ -61,10 +59,10 @@ public class Monster : CharacterInfo
         if(this.State == STATE.MOVE)
         {
             Move();
-            anim.speed = speed;
         }
     }
 
+    // ----------------------------------------------------------------[이동]
     void Move()
     {
         navAgent.isStopped = false;
@@ -82,6 +80,7 @@ public class Monster : CharacterInfo
         navAgent.nextPosition = transform.position;
     }
 
+    // ----------------------------------------------------------------[데미지 받음]
     public void DamagedHP(float _damage)
     {
         this.tag = "Untagged";
@@ -89,40 +88,95 @@ public class Monster : CharacterInfo
         anim.SetTrigger(AnimString.Damaged);
         HPBar.SetActive(true);
 
-        StartCoroutine(DamageEffect());
-        StartCoroutine(HPBarEffect());
 
+        if (this.State == STATE.MOVE)
+        {
+            StartCoroutine(DamageEffectCoroutine());
+        }
+        StartCoroutine(HPBarUICoroutine());
+        
         if (this.HP <= 0)
         {
             Die();
         }
     }
 
-    IEnumerator DamageEffect()
+    IEnumerator DamageEffectCoroutine()
     {
-        Color defaultColor = bodyMaterial.color;
         bodyMaterial.color = new Color(1, 0.2f, 0.2f, 0.8f);
-
 
         yield return new WaitForSeconds(0.1f);
 
         bodyMaterial.color = defaultColor;
-        this.tag = "Monster";
     }
 
-    IEnumerator HPBarEffect()
+    IEnumerator HPBarUICoroutine()
     {
+        yield return new WaitForSeconds(0.1f);
+        // 때리는 쿨타임을 여기다 넣음 (개날림코드)
+        this.tag = "Monster";
+
         yield return new WaitForSeconds(1.5f);
+
         HPBar.SetActive(false);
     }
+    // ----------------------------------------------------------------[이동속도 감소]
+    int trapCount = 0;
+    public void Slow(bool _isOn, float _slowSpeed)
+    {
+        if (_isOn)
+        {
+            ++trapCount;
+            bodyMaterial.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);
+            this.navAgent.speed = _slowSpeed;
+            this.anim.speed = _slowSpeed;
+        }
+        else
+        {
+            --trapCount;
+        }
 
+        if(trapCount <= 0)
+        {
+            bodyMaterial.color = defaultColor;
+            this.navAgent.speed = 1;
+            this.anim.speed = 1;
+        }
+    }
+
+    // ----------------------------------------------------------------[얼음]
+    public void Freeze(float _freezeTime)
+    {
+        StartCoroutine(FreezeCoroutine(_freezeTime));
+    }
+
+    IEnumerator FreezeCoroutine(float _freezeTime)
+    {
+        bodyMaterial.color = new Color(0f, 0.9f, 1f, 0.5f);
+
+        this.navAgent.speed = 0;
+        this.anim.speed = 0;
+        this.SetState(STATE.FREEZE);
+
+        yield return new WaitForSeconds(_freezeTime);
+
+        bodyMaterial.color = defaultColor;
+        this.navAgent.speed = 1;
+        this.anim.speed = 1;
+        this.SetState(STATE.MOVE);
+    }
+
+    // ----------------------------------------------------------------[죽음]
     void Die()
     {
+        this.anim.speed = 1;
+        bodyMaterial.color = defaultColor;
+
         SetFace(face.damageFace);
         this.SetState(STATE.DIE);
         HPBar.SetActive(false);
 
-        this.navAgent.Stop();
+        this.navAgent.speed = 0;
         this.rigidbody.velocity = Vector3.zero;
         this.rigidbody.useGravity = false;
         this.sphereCollider.enabled = false;

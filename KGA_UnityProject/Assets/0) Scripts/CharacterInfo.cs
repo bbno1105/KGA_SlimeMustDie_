@@ -20,7 +20,9 @@ public class CharacterInfo : MonoBehaviour
     {
         IDLE,
         MOVE,
-        Attack,
+        ATTACK,
+        DAMAGED,
+        FREEZE,
         DIE
     }
     [field: SerializeField] public STATE State { get; protected set; }

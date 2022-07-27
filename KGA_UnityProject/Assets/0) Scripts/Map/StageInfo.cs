@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StageInfo : MonoBehaviour
 {
+    [field: SerializeField] public int Level { get; private set; }
+
     [field: SerializeField] public GameObject StartPOS { get; private set; }
     [field: SerializeField] public GameObject GoalPOS { get; private set; }
 }
