@@ -98,13 +98,6 @@ public class PlayerControl : MonoBehaviour
         PInfo.anim.SetTrigger(AnimString.Jump);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            PInfo.SetJumpState(false);
-        }
-    }
 
     void SetAnimation()
     {

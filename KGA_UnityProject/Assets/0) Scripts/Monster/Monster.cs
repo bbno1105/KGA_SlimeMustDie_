@@ -23,7 +23,7 @@ public class Monster : CharacterInfo
 
     Animator anim;
     Rigidbody rigidbody;
-    SphereCollider collider;
+    SphereCollider sphereCollider;
     Material faceMaterial;
     Material bodyMaterial;
     GameObject HPBar;
@@ -37,7 +37,8 @@ public class Monster : CharacterInfo
     {
         anim = this.transform.GetComponent<Animator>();
         rigidbody = this.transform.GetComponent<Rigidbody>();
-        collider = this.transform.GetComponent<SphereCollider>();
+        sphereCollider = this.transform.GetComponent<SphereCollider>();
+
         bodyMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[0];
         faceMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[1];
         HPBar = this.transform.GetChild(2).gameObject;
@@ -57,7 +58,7 @@ public class Monster : CharacterInfo
 
     void Update()
     {
-        if(this.State != STATE.DIE)
+        if(this.State == STATE.MOVE)
         {
             Move();
             anim.speed = speed;
@@ -100,10 +101,10 @@ public class Monster : CharacterInfo
     IEnumerator DamageEffect()
     {
         Color defaultColor = bodyMaterial.color;
-        bodyMaterial.color = new Color(1, 0, 0, 0.8f);
+        bodyMaterial.color = new Color(1, 0.2f, 0.2f, 0.8f);
 
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         bodyMaterial.color = defaultColor;
         this.tag = "Monster";
@@ -124,7 +125,7 @@ public class Monster : CharacterInfo
         this.navAgent.Stop();
         this.rigidbody.velocity = Vector3.zero;
         this.rigidbody.useGravity = false;
-        this.collider.enabled = false;
+        this.sphereCollider.enabled = false;
 
         anim.SetTrigger(AnimString.Dead);
     }

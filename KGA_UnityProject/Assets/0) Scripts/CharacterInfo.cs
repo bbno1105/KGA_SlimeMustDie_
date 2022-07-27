@@ -23,7 +23,7 @@ public class CharacterInfo : MonoBehaviour
         Attack,
         DIE
     }
-    public STATE State { get; protected set; }
+    [field: SerializeField] public STATE State { get; protected set; }
     public void SetState(STATE _state) { this.State = _state; }
 
     public bool IsAttack { get; protected set; }

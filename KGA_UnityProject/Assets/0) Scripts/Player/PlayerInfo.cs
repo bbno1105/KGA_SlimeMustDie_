@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerInfo : CharacterInfo
 {
     // 플레이어만 가지고 있는 상태
-    public bool IsRun { get; private set; }
+    [field: SerializeField] public bool IsRun { get; private set; }
     public void SetRunState(bool _isRun) { this.IsRun = _isRun; }
 
-    public bool IsJump { get; private set; }
+    [field : SerializeField] public bool IsJump { get; private set; }
     public void SetJumpState(bool _isJump) { this.IsJump = _isJump; }
 
     public Rigidbody rigid;
@@ -38,4 +38,11 @@ public class PlayerInfo : CharacterInfo
         anim = this.gameObject.GetComponentInChildren<Animator>();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            this.SetJumpState(false);
+        }
+    }
 }

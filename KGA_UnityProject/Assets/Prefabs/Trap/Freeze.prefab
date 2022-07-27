@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 444836604501611755}
   - component: {fileID: 9138101176751229646}
   m_Layer: 0
-  m_Name: Tar
+  m_Name: Freeze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7e3b49f9ffc5d034b895ec8358bb04b1, type: 2}
+  - {fileID: 2100000, guid: abd728f8a1034554486e4c443fc283a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,12 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e275ce733565c049bba32e8e9aad2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolTime: 0
+  CoolTime: 10
   Cost: 0
   isDamageTrap: 0
   Damage: 0
-  isSlowTrap: 1
+  isSlowTrap: 0
   Slow: 0
-  isFreezeTrap: 0
-  FreezeTime: 0
+  isFreezeTrap: 1
+  FreezeTime: 3
   isTrapOn: 0
