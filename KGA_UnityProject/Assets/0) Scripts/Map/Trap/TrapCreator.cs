@@ -15,11 +15,6 @@ public class TrapCreator : MonoBehaviour
 
     int nowSelect = 0;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         select();
@@ -38,7 +33,7 @@ public class TrapCreator : MonoBehaviour
                 nowSelectTrap = null;
             }
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             nowSelect = 0;
@@ -69,6 +64,24 @@ public class TrapCreator : MonoBehaviour
             if (nowSelectTrap) nowSelectTrap.SetActive(false);
             nowSelectTrap = selectTrapPrefabs[nowSelect];
             nowSelectTrap.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            nowSelect = 4;
+            if (nowSelectTrap) nowSelectTrap.SetActive(false);
+            nowSelectTrap = selectTrapPrefabs[nowSelect];
+            nowSelectTrap.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SelectEffect.transform.rotation *= Quaternion.Euler(0f, 90f, 0f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SelectEffect.transform.rotation *= Quaternion.Euler(0f, -90f, 0f);
         }
 
         if (nowSelectTrap == null) return;

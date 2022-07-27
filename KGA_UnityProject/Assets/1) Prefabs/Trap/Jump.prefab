@@ -113,10 +113,10 @@ MonoBehaviour:
   CoolTime: 5
   Cost: 0
   isContinuousTrap: 0
-  CountinueTime: 0
+  CountinueTime: 1
   isDamageTrap: 0
   Damage: 1
-  DamageTime: 0
+  DamageCooltime: 0
   isSlowTrap: 0
   SlowSpeed: 0
   isFreezeTrap: 0

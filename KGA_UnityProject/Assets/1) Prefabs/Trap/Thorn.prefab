@@ -116,7 +116,7 @@ MonoBehaviour:
   CountinueTime: 0
   isDamageTrap: 1
   Damage: 30
-  DamageTime: 0
+  DamageCooltime: 0
   isSlowTrap: 0
   SlowSpeed: 0
   isFreezeTrap: 0

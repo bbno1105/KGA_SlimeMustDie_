@@ -19,7 +19,8 @@ public class Trap : MonoBehaviour
     [Header("데미지 함정")]
     public bool isDamageTrap;
     public float Damage;
-    public float DamageTime; // 얼마에 1대 때릴 것인가
+    public float DamageCooltime; // 사실 SPD : 몇 초에 1대 때릴 것인가
+    float nowDamageCooltime;
 
     [Header("이속감소 함정")]
     public bool isSlowTrap;
@@ -53,35 +54,43 @@ public class Trap : MonoBehaviour
 
     void Update()
     {
+        // TrapON & TrapActivate
         if(isTrapOn && target.Count > 0)
         {
-            for (int i = 0; i < target.Count; i++)
+            nowDamageCooltime += Time.deltaTime;
+            if(DamageCooltime <= nowDamageCooltime)
             {
-                if (target[i] == null)
+                for (int i = 0; i < target.Count; i++)
                 {
-                    target.RemoveAt(i);
-                    continue;
+                    if (target[i] == null)
+                    {
+                        target.RemoveAt(i);
+                        continue;
+                    }
+                    TrapActivate(target[i]);
                 }
-                TrapActivate(target[i]);
-            }
-
-            if (isContinuousTrap == false)
-            {
-                nowCountinueTime += 1 * Time.deltaTime;
-                if(CountinueTime < nowCountinueTime)
-                {
-                    nowCountinueTime = 0;
-                    isTrapOn = false;
-                }
+                nowDamageCooltime = 0;
             }
         }
         else
         { 
-            nowCoolTime += 1 * Time.deltaTime;
+            nowCoolTime += Time.deltaTime;
             if(CoolTime <= nowCoolTime)
             {
                 isTrapOn = true;
                 nowCoolTime = 0;
+                nowDamageCooltime = 0;
+            }
+        }
+
+        // TrapOFF : 함정 켜짐 + 무한 지속이 아니라면 들어옴
+        if (isTrapOn && isContinuousTrap == false)
+        {
+            nowCountinueTime += 1 * Time.deltaTime;
+            if (CountinueTime <= nowCountinueTime)
+            {
+                nowCountinueTime = 0;
+                isTrapOn = false;
             }
         }
 
@@ -130,7 +139,7 @@ public class Trap : MonoBehaviour
             return;
         }
 
-        if (isDamageTrap) ActiveDamageTrap(_target);
+        if (isDamageTrap) DamageTrap(_target);
         if (isFreezeTrap) ActiveFreezeTrap(_target);
         if (isRigidTrap) ActiveJumpTrap(_target);
     }
@@ -147,8 +156,10 @@ public class Trap : MonoBehaviour
         }
     }
 
+
+
     // -----------------------------------------------------------------------------------[데미지 함정]
-    public void ActiveDamageTrap(Collider _other)
+    public void DamageTrap(Collider _other)
     {
         monster = _other.GetComponent<Monster>();
         monster.DamagedHP(Damage);
@@ -175,5 +186,4 @@ public class Trap : MonoBehaviour
         monster = _other.GetComponent<Monster>();
         monster.Slow(_isOn,SlowSpeed);
     }
-
 }

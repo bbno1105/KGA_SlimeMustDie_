@@ -125,27 +125,29 @@ public class Monster : CharacterInfo
 
         HPBar.SetActive(false);
     }
+
     // ----------------------------------------------------------------[이동속도 감소]
-    int trapCount = 0;
+    int slowTrapCount = 0;
     public void Slow(bool _isOn, float _slowSpeed)
     {
         if (_isOn)
         {
-            ++trapCount;
+            ++slowTrapCount;
             bodyMaterial.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);
             this.navAgent.speed = _slowSpeed;
             this.anim.speed = _slowSpeed;
         }
         else
         {
-            --trapCount;
+            --slowTrapCount;
         }
 
-        if(trapCount <= 0)
+        if(slowTrapCount <= 0)
         {
             bodyMaterial.color = defaultColor;
             this.navAgent.speed = 1;
             this.anim.speed = 1;
+            slowTrapCount = 0;
         }
     }
 
