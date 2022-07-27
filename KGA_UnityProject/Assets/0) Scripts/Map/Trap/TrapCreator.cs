@@ -32,7 +32,11 @@ public class TrapCreator : MonoBehaviour
         // TODO : 나중에 수정할 코드
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (nowSelectTrap) nowSelectTrap.SetActive(false);
+            if (nowSelectTrap)
+            {
+                nowSelectTrap.SetActive(false);
+                nowSelectTrap = null;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -54,6 +58,14 @@ public class TrapCreator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             nowSelect = 2;
+            if (nowSelectTrap) nowSelectTrap.SetActive(false);
+            nowSelectTrap = selectTrapPrefabs[nowSelect];
+            nowSelectTrap.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            nowSelect = 3;
             if (nowSelectTrap) nowSelectTrap.SetActive(false);
             nowSelectTrap = selectTrapPrefabs[nowSelect];
             nowSelectTrap.SetActive(true);

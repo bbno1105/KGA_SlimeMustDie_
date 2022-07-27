@@ -32,7 +32,7 @@ public class CameraAim : MonoBehaviour
         LayerMask targetLayer = LayerMask.NameToLayer("Tile");
         int layMask = 1 << targetLayer.value;
 
-        if (Physics.Raycast(ray, out hit, 5f, layMask))
+        if (Physics.Raycast(ray, out hit, 10f, layMask))
         {
             isTarget = true;
             hitObject = hit.collider.gameObject;

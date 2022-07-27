@@ -164,8 +164,9 @@ public class Trap : MonoBehaviour
     // -----------------------------------------------------------------------------------[점프 함정]
     public void ActiveJumpTrap(Collider _other)
     {
-        Rigidbody rigid = _other.GetComponent<Rigidbody>();
-        rigid.AddForce(this.transform.forward * addFource + Vector3.up * addFource * 10);
+        monster = _other.GetComponent<Monster>();
+        Vector3 jumpVector = (this.transform.forward * addFource + this.transform.up * 1.5f * addFource);
+        monster.Jump(jumpVector);
     }
 
     // -----------------------------------------------------------------------------------[이속감소 함정]

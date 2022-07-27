@@ -611,10 +611,12 @@ MonoBehaviour:
   - {fileID: 8953282706906756884, guid: 56745d22b12fa5e499c9f77ebac11cb0, type: 3}
   - {fileID: 2727311108960750975, guid: 2a107609c5e087941af2e55f53e6355c, type: 3}
   - {fileID: 2727311108960750975, guid: 48d948d4e664ac64a95aa9f89f0b0db9, type: 3}
+  - {fileID: 8953282706906756884, guid: 7475af22dca146043ab83e9ccb39c228, type: 3}
   selectTrapPrefabs:
   - {fileID: 7895893457188609531}
   - {fileID: 3843302779529112070}
   - {fileID: 1913029959}
+  - {fileID: 6789066897852312399, guid: c5036bb560b301d46b34a136c68542d9, type: 3}
 --- !u!114 &336701670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2743,7 +2745,7 @@ MonoBehaviour:
   m_Text: "\uC774\uB3D9 : \uBC29\uD5A5\uD0A4(W,A,S,D)  |  \uB2EC\uB9AC\uAE30 : L_Shift 
     |  \uC810\uD504 : Space  |  \uACF5\uACA9,\uC124\uCE58 : \uB9C8\uC6B0\uC2A4 \uD074\uB9AD
     \n\uC120\uD0DD : 1(\uBB34\uAE30), 2(\uACF5\uACA9\uD2B8\uB7A9), 3(\uC774\uB3D9\uBC29\uD574\uD2B8\uB7A9-\uBBF8\uAD6C\uD604),
-    4(\uBE59\uACB0\uD2B8\uB7A9)"
+    4(\uBE59\uACB0\uD2B8\uB7A9)  |  5(\uC810\uD504\uD2B8\uB7A9)"
 --- !u!222 &1126430139
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4000,14 +4002,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 727591876930668803, guid: d941199d4a58fcb45adc75ea8e37c42c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023326350027408235, guid: d941199d4a58fcb45adc75ea8e37c42c, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
     - target: {fileID: 6216532115693788942, guid: d941199d4a58fcb45adc75ea8e37c42c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10196,10 +10190,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 407133773927454528, guid: 93df5c48d5e021040916b0e984d9b01a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3467851699220123360, guid: 93df5c48d5e021040916b0e984d9b01a, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -10243,10 +10233,6 @@ PrefabInstance:
     - target: {fileID: 3467851699220123360, guid: 93df5c48d5e021040916b0e984d9b01a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925402040811663582, guid: 93df5c48d5e021040916b0e984d9b01a, type: 3}
-      propertyPath: m_Constraints
-      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 4281683080859636826, guid: 93df5c48d5e021040916b0e984d9b01a, type: 3}
       propertyPath: m_Name
@@ -17731,14 +17717,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 171062395740735948, guid: 0ba0f6eee23032e4e83d421e739dc905, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 2489949235725742565, guid: 0ba0f6eee23032e4e83d421e739dc905, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2821659471103554755, guid: 0ba0f6eee23032e4e83d421e739dc905, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -18887,14 +18865,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 3212065933364106160, guid: 11eed2dfd1329ab4db9e7f27b8e628b7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965505459853183828, guid: 11eed2dfd1329ab4db9e7f27b8e628b7, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
     - target: {fileID: 6312573360258431772, guid: 11eed2dfd1329ab4db9e7f27b8e628b7, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -19205,10 +19175,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 3404714991107424571, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6173172085731050060, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_Name
       value: Slime_03
@@ -19256,10 +19222,6 @@ PrefabInstance:
     - target: {fileID: 6836556466655795446, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918724883593683527, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
-      propertyPath: m_Constraints
-      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
@@ -20381,14 +20343,6 @@ PrefabInstance:
     - target: {fileID: 873531700701352353, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
       propertyPath: m_Name
       value: Slime_01_King
-      objectReference: {fileID: 0}
-    - target: {fileID: 4190905250562573641, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7432935537208377503, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
-      propertyPath: m_Constraints
-      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 8955322500898459853, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
       propertyPath: m_RootOrder
@@ -22821,14 +22775,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 4392377946258931194, guid: 8760cc9eb30a2b340b14499b6e150dc4, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479916958634811829, guid: 8760cc9eb30a2b340b14499b6e150dc4, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7099655024501674456, guid: 8760cc9eb30a2b340b14499b6e150dc4, type: 3}
       propertyPath: m_Name
       value: Slime_03 Sprout
@@ -23131,14 +23077,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393462109}
     m_Modifications:
-    - target: {fileID: 4821071533980534867, guid: 66ae442726d1cf4428dacb34edd61ac4, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 5751452704121592941, guid: 66ae442726d1cf4428dacb34edd61ac4, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6118174221721670358, guid: 66ae442726d1cf4428dacb34edd61ac4, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -37263,14 +37201,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3278883554580211484, guid: 72c47fdc43d84b243bdc109c284341d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5956018999129853014, guid: 72c47fdc43d84b243bdc109c284341d6, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476153920298624825, guid: 72c47fdc43d84b243bdc109c284341d6, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

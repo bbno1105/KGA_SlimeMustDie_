@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7118406445617059272}
   - component: {fileID: 8552075593340580706}
   m_Layer: 0
-  m_Name: Thorn
+  m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7b46a644ae1c4eb47a6339d990df516e, type: 2}
+  - {fileID: 2100000, guid: 1afdcd348e4c89a48856e2830ae98634, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,17 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e275ce733565c049bba32e8e9aad2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolTime: 3
+  CoolTime: 5
   Cost: 0
   isContinuousTrap: 0
   CountinueTime: 0
-  isDamageTrap: 1
-  Damage: 200
+  isDamageTrap: 0
+  Damage: 1
   DamageTime: 0
   isSlowTrap: 0
   SlowSpeed: 0
   isFreezeTrap: 0
   FreezeTime: 0
   isRigidTrap: 1
-  addFource: 200
+  addFource: 5
   isTrapOn: 0

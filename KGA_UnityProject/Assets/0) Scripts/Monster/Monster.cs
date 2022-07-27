@@ -19,25 +19,30 @@ public class Monster : CharacterInfo
 
     [SerializeField] Face face;
     int normalFaceNum;
-    [SerializeField] NavMeshAgent navAgent;
 
+    NavMeshAgent navAgent;
+    Rigidbody rigid;
     Animator anim;
-    Rigidbody rigidbody;
+
     SphereCollider sphereCollider;
+
     Material faceMaterial;
     Material bodyMaterial;
+
     GameObject HPBar;
 
     bool isAttack;
+    bool isFly;
+
     GameObject target;
     Color defaultColor;
 
     void Start()
     {
+        navAgent = this.transform.GetComponent<NavMeshAgent>();
         anim = this.transform.GetComponent<Animator>();
-        rigidbody = this.transform.GetComponent<Rigidbody>();
         sphereCollider = this.transform.GetComponent<SphereCollider>();
-
+        rigid = this.transform.GetComponent<Rigidbody>();
         bodyMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[0];
         faceMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[1];
         HPBar = this.transform.GetChild(2).gameObject;
@@ -56,7 +61,7 @@ public class Monster : CharacterInfo
 
     void Update()
     {
-        if(this.State == STATE.MOVE)
+        if (this.State == STATE.MOVE && !isFly)
         {
             Move();
         }
@@ -166,6 +171,18 @@ public class Monster : CharacterInfo
         this.SetState(STATE.MOVE);
     }
 
+    // ----------------------------------------------------------------[³­´Ù]
+    public void Jump(Vector3 _jumpVector)
+    {
+        if (isFly) return;
+        isFly = true;
+
+        navAgent.enabled = false;
+        rigid.isKinematic = false;
+
+        rigid.velocity = _jumpVector;
+    }
+
     // ----------------------------------------------------------------[Á×À½]
     void Die()
     {
@@ -177,8 +194,6 @@ public class Monster : CharacterInfo
         HPBar.SetActive(false);
 
         this.navAgent.speed = 0;
-        this.rigidbody.velocity = Vector3.zero;
-        this.rigidbody.useGravity = false;
         this.sphereCollider.enabled = false;
 
         anim.SetTrigger(AnimString.Dead);
@@ -199,6 +214,16 @@ public class Monster : CharacterInfo
         if (other.tag == "Goal")
         {
             DestroySlime();
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (isFly && collision.gameObject.tag == "Ground")
+        {
+            isFly = false;
+            navAgent.enabled = true;
+            rigid.isKinematic = false;
         }
     }
 
