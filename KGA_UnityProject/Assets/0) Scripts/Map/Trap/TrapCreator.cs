@@ -13,6 +13,7 @@ public class TrapCreator : MonoBehaviour
     [SerializeField] GameObject[] selectTrapPrefabs;
     GameObject nowSelectTrap;
 
+
     int nowSelect = 0;
 
     void Update()
@@ -77,7 +78,8 @@ public class TrapCreator : MonoBehaviour
         if (nowSelectTrap == null) return;
         if (nowSelectTrap) nowSelectTrap.SetActive(camerAim.isTarget);
 
-        nowSelectTrap.transform.position = new Vector3(this.SelectEffect.transform.position.x, nowSelectTrap.transform.position.y, this.SelectEffect.transform.position.z);
+        //nowSelectTrap.transform.up = 
+        nowSelectTrap.transform.position = new Vector3(this.SelectEffect.transform.position.x, this.SelectEffect.transform.position.y, this.SelectEffect.transform.position.z);
         nowSelectTrap.transform.rotation = SelectEffect.transform.rotation;
     }
 
@@ -93,7 +95,14 @@ public class TrapCreator : MonoBehaviour
         if (camerAim.isTarget && nowSelectTrap != null)
         {
             SelectEffect.SetActive(true);
-            SelectEffect.transform.position = new Vector3(camerAim.hitPos.x, SelectEffect.transform.position.y, camerAim.hitPos.z);
+            SelectEffect.transform.position = camerAim.hitPos;
+            SelectEffect.transform.up = camerAim.hit.normal;
+
+            SelectEffect.transform.position += camerAim.hit.normal;  
+
+            // SelectEffect.transform.
+
+            // SelectEffect.transform.position = new Vector3(camerAim.hitPos.x, SelectEffect.transform.position.y, camerAim.hitPos.z);
             if (camerAim.hit.collider.gameObject.GetComponent<Block>().IsTrapOn)
             {
                 SelectEffect.transform.GetChild(0).gameObject.SetActive(true);

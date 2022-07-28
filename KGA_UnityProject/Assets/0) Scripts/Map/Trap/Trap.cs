@@ -7,6 +7,13 @@ public class Trap : MonoBehaviour
 {
     Monster monster;
 
+    public enum TYPE
+    {
+        GROUND,
+        WALL
+    }
+    public TYPE Type;
+
     public float CoolTime;
     float nowCoolTime = 0;
 

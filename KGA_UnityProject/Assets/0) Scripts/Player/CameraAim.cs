@@ -28,7 +28,7 @@ public class CameraAim : MonoBehaviour
     void FindTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-        
+
         LayerMask targetLayer = LayerMask.NameToLayer("Tile");
         int layMask = 1 << targetLayer.value;
 
