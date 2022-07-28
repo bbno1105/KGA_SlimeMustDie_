@@ -37,57 +37,55 @@ public class TrapCreator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             nowSelect = 0;
-            if (nowSelectTrap) nowSelectTrap.SetActive(false);
-            nowSelectTrap = selectTrapPrefabs[nowSelect];
-            nowSelectTrap.SetActive(true);
+            ChangeSelectTrap();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             nowSelect = 1;
-            if (nowSelectTrap) nowSelectTrap.SetActive(false);
-            nowSelectTrap = selectTrapPrefabs[nowSelect];
-            nowSelectTrap.SetActive(true);
+            ChangeSelectTrap();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             nowSelect = 2;
-            if (nowSelectTrap) nowSelectTrap.SetActive(false);
-            nowSelectTrap = selectTrapPrefabs[nowSelect];
-            nowSelectTrap.SetActive(true);
+            ChangeSelectTrap();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             nowSelect = 3;
-            if (nowSelectTrap) nowSelectTrap.SetActive(false);
-            nowSelectTrap = selectTrapPrefabs[nowSelect];
-            nowSelectTrap.SetActive(true);
+            ChangeSelectTrap();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             nowSelect = 4;
-            if (nowSelectTrap) nowSelectTrap.SetActive(false);
-            nowSelectTrap = selectTrapPrefabs[nowSelect];
-            nowSelectTrap.SetActive(true);
+            ChangeSelectTrap();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SelectEffect.transform.rotation *= Quaternion.Euler(0f, 90f, 0f);
+            SelectEffect.transform.rotation *= Quaternion.Euler(0f, -90f, 0f);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SelectEffect.transform.rotation *= Quaternion.Euler(0f, -90f, 0f);
+            SelectEffect.transform.rotation *= Quaternion.Euler(0f, 90f, 0f);
         }
 
         if (nowSelectTrap == null) return;
         if (nowSelectTrap) nowSelectTrap.SetActive(camerAim.isTarget);
 
         nowSelectTrap.transform.position = new Vector3(this.SelectEffect.transform.position.x, nowSelectTrap.transform.position.y, this.SelectEffect.transform.position.z);
+        nowSelectTrap.transform.rotation = SelectEffect.transform.rotation;
+    }
+
+    void ChangeSelectTrap()
+    {
+        if (nowSelectTrap) nowSelectTrap.SetActive(false);
+        nowSelectTrap = selectTrapPrefabs[nowSelect];
+        nowSelectTrap.SetActive(true);
     }
 
     void SetSelectEffect()

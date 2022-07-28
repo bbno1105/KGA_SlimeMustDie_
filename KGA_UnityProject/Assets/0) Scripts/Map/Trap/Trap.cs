@@ -16,6 +16,8 @@ public class Trap : MonoBehaviour
     public float CountinueTime; // 얼마나 지속할 것인가
     float nowCountinueTime;
 
+
+
     [Header("데미지 함정")]
     public bool isDamageTrap;
     public float Damage;
@@ -34,22 +36,36 @@ public class Trap : MonoBehaviour
     public bool isRigidTrap;
     public float addFource; // 점프 힘
 
+    [Header("이펙트")]
+    [SerializeField] bool isAnimation;
+    Animator anim;
+    [SerializeField] bool isParticle;
+    ParticleSystem[] particle;
+
+
     public bool isTrapOn;
+    public bool isTrapActive;
 
-    Material material;
-    Color defaultColor;
+    // Material material; // 테스트용 Material
+    // Color defaultColor;
 
-    List<Collider> target = new List<Collider>();
+    [SerializeField] List<Collider> target = new List<Collider>();
+
 
     void Start()
     {
-        material = this.GetComponent<Renderer>().material;
+        anim = this.GetComponent<Animator>();
+        if (anim != null) isAnimation = true;
+        particle = this.GetComponentsInChildren<ParticleSystem>();
+        if (particle.Length > 0) isParticle = true;
+
+        // material = this.GetComponent<Renderer>().material;
         Initialized();
     }
 
     void Initialized()
     {
-        defaultColor = material.color;
+        // defaultColor = material.color;
     }
 
     void Update()
@@ -71,6 +87,8 @@ public class Trap : MonoBehaviour
                 }
                 nowDamageCooltime = 0;
             }
+
+            isTrapActive = true;
         }
         else
         { 
@@ -84,13 +102,22 @@ public class Trap : MonoBehaviour
         }
 
         // TrapOFF : 함정 켜짐 + 무한 지속이 아니라면 들어옴
-        if (isTrapOn && isContinuousTrap == false)
+        if (isTrapActive && isContinuousTrap == false)
         {
             nowCountinueTime += 1 * Time.deltaTime;
             if (CountinueTime <= nowCountinueTime)
             {
                 nowCountinueTime = 0;
                 isTrapOn = false;
+                isTrapActive = false;
+
+                if (isParticle)
+                {
+                    for (int i = 0; i < particle.Length; i++)
+                    {
+                        particle[i].Stop();
+                    }
+                }
             }
         }
 
@@ -101,11 +128,11 @@ public class Trap : MonoBehaviour
     {
         if(_isTrapOn) // 켜진상태 애니메이션
         {
-            this.material.color = Color.white;
+            // this.material.color = Color.white;
         }
         else // 꺼진 상태 애니메이션
         {
-            this.material.color = defaultColor;
+            // this.material.color = defaultColor;
         }
     }
 
@@ -122,7 +149,7 @@ public class Trap : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Monster")
+        if (other.tag == "Monster" || other.tag == "DamagedMonster")
         {
             target.Remove(other);
 
@@ -142,6 +169,15 @@ public class Trap : MonoBehaviour
         if (isDamageTrap) DamageTrap(_target);
         if (isFreezeTrap) ActiveFreezeTrap(_target);
         if (isRigidTrap) ActiveJumpTrap(_target);
+
+        if(isAnimation) anim.SetTrigger("isActive");
+        if(isParticle)
+        {
+            for (int i = 0; i < particle.Length; i++)
+            {
+                particle[i].Play();
+            }
+        }
     }
 
     void TrapPassive(bool _isOn, Collider _target)
@@ -178,6 +214,8 @@ public class Trap : MonoBehaviour
         monster = _other.GetComponent<Monster>();
         Vector3 jumpVector = (this.transform.forward * addFource + this.transform.up * 1.5f * addFource);
         monster.Jump(jumpVector);
+        
+
     }
 
     // -----------------------------------------------------------------------------------[이속감소 함정]

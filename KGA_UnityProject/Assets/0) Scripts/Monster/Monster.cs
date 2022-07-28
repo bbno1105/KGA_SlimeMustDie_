@@ -88,7 +88,7 @@ public class Monster : CharacterInfo
     // ----------------------------------------------------------------[데미지 받음]
     public void DamagedHP(float _damage)
     {
-        this.tag = "Untagged";
+        this.tag = "DamagedMonster";
         this.HP -= (int)_damage;
         anim.SetTrigger(AnimString.Damaged);
         HPBar.SetActive(true);
@@ -176,12 +176,13 @@ public class Monster : CharacterInfo
     // ----------------------------------------------------------------[난다]
     public void Jump(Vector3 _jumpVector)
     {
-        if (isFly) return;
+        if (isFly && rigid.velocity.y > 0) return;
         isFly = true;
 
         navAgent.enabled = false;
         rigid.isKinematic = false;
 
+        rigid.velocity = Vector3.zero;
         rigid.velocity = _jumpVector;
     }
 
