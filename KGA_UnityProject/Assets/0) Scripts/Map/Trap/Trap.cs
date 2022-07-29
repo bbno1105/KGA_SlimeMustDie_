@@ -7,12 +7,10 @@ public class Trap : MonoBehaviour
 {
     Monster monster;
 
-    public enum TYPE
-    {
-        GROUND,
-        WALL
-    }
-    public TYPE Type;
+    [Header("설치 가능한 장소")]
+    public bool CanBuildGround;
+    public bool CanBuildWall;
+    public bool CanBuildCeiling;
 
     public float CoolTime;
     float nowCoolTime = 0;
@@ -22,8 +20,6 @@ public class Trap : MonoBehaviour
     public bool isContinuousTrap; // 무한 지속인가
     public float CountinueTime; // 얼마나 지속할 것인가
     float nowCountinueTime;
-
-
 
     [Header("데미지 함정")]
     public bool isDamageTrap;

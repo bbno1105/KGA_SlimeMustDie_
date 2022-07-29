@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: (psd) Accessory_02
-  m_Shader: {fileID: 4800000, guid: af8454e09b3a41448a4140e792059446, type: 3}
+  m_Shader: {fileID: 4800000, guid: 01494e58d87212f44ab51d29caea84e4, type: 3}
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
   m_InvalidKeywords:
@@ -50,6 +50,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClippingMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -155,6 +159,7 @@ Material:
     - _BumpScale: 1
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
+    - _Clipping_Level: 0
     - _ColorShift_Speed: 0
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -167,8 +172,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _HighColor_Power: 0
+    - _Inverse_Clipping: 0
     - _Inverse_MatcapMask: 0
     - _Inverse_Z_Axis_BLD: 1
+    - _IsBaseMapAlphaAsClippingMask: 0
     - _Is_BLD: 0
     - _Is_BakedNormal: 0
     - _Is_BlendAddToHiColor: 0
@@ -223,6 +230,9 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StepOffset: 0
+    - _TessEdgeLength: 5
+    - _TessExtrusionAmount: 0
+    - _TessPhongStrength: 0.5
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
     - _Tweak_HighColorMaskLevel: 0
@@ -232,6 +242,7 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
+    - _Tweak_transparency: 0
     - _UVSec: 0
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 0

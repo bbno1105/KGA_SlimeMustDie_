@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Accessory_01_00
-  m_Shader: {fileID: 4800000, guid: af8454e09b3a41448a4140e792059446, type: 3}
+  m_Shader: {fileID: 4800000, guid: 01494e58d87212f44ab51d29caea84e4, type: 3}
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
   m_InvalidKeywords:
@@ -238,6 +238,9 @@ Material:
     - _ShadeColor_Step: 0
     - _SrcBlend: 1
     - _StepOffset: -0.021
+    - _TessEdgeLength: 5
+    - _TessExtrusionAmount: 0
+    - _TessPhongStrength: 0.5
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
     - _Tweak_HighColorMaskLevel: 0
@@ -255,7 +258,7 @@ Material:
     - _ZWrite: 1
     - _simpleUI: 0
     - _utsTechnique: 1
-    - _utsVersion: 2.06
+    - _utsVersion: 2.09
     m_Colors:
     - _1st_ShadeColor: {r: 0.74308336, g: 0.6000801, b: 0.8773585, a: 1}
     - _2nd_ShadeColor: {r: 0.39288896, g: 0.48700324, b: 0.764151, a: 1}

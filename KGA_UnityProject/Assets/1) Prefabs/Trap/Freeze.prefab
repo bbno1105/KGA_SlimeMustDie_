@@ -156,6 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e275ce733565c049bba32e8e9aad2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanBuildGround: 0
+  CanBuildWall: 1
+  CanBuildCeiling: 1
   CoolTime: 10
   Cost: 0
   isContinuousTrap: 0

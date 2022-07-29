@@ -2,18 +2,31 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Accessory_03_12
   m_Shader: {fileID: 4800000, guid: e8e7d781c3155254b9ea8956c5bd1218, type: 3}
-  m_ShaderKeywords: _ _EMISSIVE_SIMPLE _INVERSE_Z_AXIS_BLD_ON _IS_BLENDADDTOMATCAP_ON
-    _IS_FILTER_HICUTPOINTLIGHTCOLOR_ON _IS_LIGHTCOLOR_1ST_SHADE_ON _IS_LIGHTCOLOR_2ND_SHADE_ON
-    _IS_LIGHTCOLOR_AP_RIMLIGHT_ON _IS_LIGHTCOLOR_BASE_ON _IS_LIGHTCOLOR_HIGHCOLOR_ON
-    _IS_LIGHTCOLOR_MATCAP_ON _IS_LIGHTCOLOR_RIMLIGHT_ON _OUTLINE_NML _SET_SYSTEMSHADOWSTOBASE_ON
-    _USE_1STAS2ND_ON _USE_BASEAS1ST_ON
+  m_ValidKeywords:
+  - _EMISSIVE_SIMPLE
+  - _OUTLINE_NML
+  m_InvalidKeywords:
+  - _
+  - _INVERSE_Z_AXIS_BLD_ON
+  - _IS_BLENDADDTOMATCAP_ON
+  - _IS_FILTER_HICUTPOINTLIGHTCOLOR_ON
+  - _IS_LIGHTCOLOR_1ST_SHADE_ON
+  - _IS_LIGHTCOLOR_2ND_SHADE_ON
+  - _IS_LIGHTCOLOR_AP_RIMLIGHT_ON
+  - _IS_LIGHTCOLOR_BASE_ON
+  - _IS_LIGHTCOLOR_HIGHCOLOR_ON
+  - _IS_LIGHTCOLOR_MATCAP_ON
+  - _IS_LIGHTCOLOR_RIMLIGHT_ON
+  - _SET_SYSTEMSHADOWSTOBASE_ON
+  - _USE_1STAS2ND_ON
+  - _USE_BASEAS1ST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -143,6 +156,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
     - _1st2nd_Shades_Feather: 0.139
@@ -251,7 +265,7 @@ Material:
     - _ZWrite: 1
     - _simpleUI: 2
     - _utsTechnique: 0
-    - _utsVersion: 2.07
+    - _utsVersion: 2.09
     m_Colors:
     - _1st_ShadeColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}

@@ -57,6 +57,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ClippingMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -159,6 +163,7 @@ Material:
     - _BumpScale: 1
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
+    - _Clipping_Level: 0
     - _ColorShift_Speed: 0
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -171,8 +176,10 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _HighColor_Power: 0
+    - _Inverse_Clipping: 0
     - _Inverse_MatcapMask: 0
     - _Inverse_Z_Axis_BLD: 1
+    - _IsBaseMapAlphaAsClippingMask: 0
     - _Is_BLD: 0
     - _Is_BakedNormal: 0
     - _Is_BlendAddToHiColor: 0
@@ -236,6 +243,7 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
+    - _Tweak_transparency: 0
     - _UVSec: 0
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 1
@@ -243,7 +251,7 @@ Material:
     - _ZWrite: 1
     - _simpleUI: 2
     - _utsTechnique: 1
-    - _utsVersion: 2.06
+    - _utsVersion: 2.09
     m_Colors:
     - _1st_ShadeColor: {r: 0.8571195, g: 0.70211816, b: 0.9245283, a: 1}
     - _2nd_ShadeColor: {r: 0.5166429, g: 0.5913283, b: 0.8113208, a: 1}

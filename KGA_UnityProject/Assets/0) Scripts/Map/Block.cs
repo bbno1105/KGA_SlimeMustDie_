@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [field : SerializeField] public bool IsTrapOn { get; private set; }
+    [field : SerializeField] public bool[] IsTrapOn { get; private set; }
 
-    public void SetTrap()
+    void Start()
     {
-        IsTrapOn = true;
+        IsTrapOn = new bool[6];
+    }
+    //public enum TRAPINDEX
+    //{
+    //    UP,
+    //    DOWN,
+    //    FRONT,
+    //    BACK,
+    //    LEFT,
+    //    RIGHT
+    //}
+    //public TRAPINDEX trapIndex;
+
+    public void SetTrap(int _trapIndex)
+    {
+        IsTrapOn[(int)_trapIndex] = true;
     }
 
-    public void DelTrap()
+    public void ClearTrap(int _trapIndex)
     {
-        IsTrapOn = false;
+        IsTrapOn[(int)_trapIndex] = false;
     }
 }

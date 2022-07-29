@@ -2,18 +2,31 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Eyeblow_01_00
   m_Shader: {fileID: 4800000, guid: af8454e09b3a41448a4140e792059446, type: 3}
-  m_ShaderKeywords: _EMISSIVE_SIMPLE _INVERSE_Z_AXIS_BLD_ON _IS_BLENDADDTOMATCAP_ON
-    _IS_FILTER_HICUTPOINTLIGHTCOLOR_ON _IS_LIGHTCOLOR_1ST_SHADE_ON _IS_LIGHTCOLOR_2ND_SHADE_ON
-    _IS_LIGHTCOLOR_AP_RIMLIGHT_ON _IS_LIGHTCOLOR_BASE_ON _IS_LIGHTCOLOR_HIGHCOLOR_ON
-    _IS_LIGHTCOLOR_MATCAP_ON _IS_LIGHTCOLOR_RIMLIGHT_ON _OUTLINE_NML _SET_SYSTEMSHADOWSTOBASE_ON
-    _USE_1STAS2ND_ON _USE_BASEAS1ST_ON
+  m_ValidKeywords:
+  - _EMISSIVE_SIMPLE
+  m_InvalidKeywords:
+  - _
+  - _INVERSE_Z_AXIS_BLD_ON
+  - _IS_BLENDADDTOMATCAP_ON
+  - _IS_FILTER_HICUTPOINTLIGHTCOLOR_ON
+  - _IS_LIGHTCOLOR_1ST_SHADE_ON
+  - _IS_LIGHTCOLOR_2ND_SHADE_ON
+  - _IS_LIGHTCOLOR_AP_RIMLIGHT_ON
+  - _IS_LIGHTCOLOR_BASE_ON
+  - _IS_LIGHTCOLOR_HIGHCOLOR_ON
+  - _IS_LIGHTCOLOR_MATCAP_ON
+  - _IS_LIGHTCOLOR_RIMLIGHT_ON
+  - _OUTLINE_NML
+  - _SET_SYSTEMSHADOWSTOBASE_ON
+  - _USE_1STAS2ND_ON
+  - _USE_BASEAS1ST_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,6 +53,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClippingMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -127,6 +144,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.13
@@ -144,6 +162,7 @@ Material:
     - _BumpScale: 1
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
+    - _Clipping_Level: 0
     - _ColorShift_Speed: 0
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -154,8 +173,10 @@ Material:
     - _GI_Intensity: 0
     - _Glossiness: 0.5
     - _HighColor_Power: 0
+    - _Inverse_Clipping: 0
     - _Inverse_MatcapMask: 0
     - _Inverse_Z_Axis_BLD: 1
+    - _IsBaseMapAlphaAsClippingMask: 0
     - _Is_BLD: 0
     - _Is_BakedNormal: 0
     - _Is_BlendAddToHiColor: 0
@@ -218,6 +239,7 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
+    - _Tweak_transparency: 0
     - _UVSec: 0
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 1
@@ -225,7 +247,7 @@ Material:
     - _ZWrite: 1
     - _simpleUI: 0
     - _utsTechnique: 1
-    - _utsVersion: 2.07
+    - _utsVersion: 2.09
     m_Colors:
     - _1st_ShadeColor: {r: 0.77767533, g: 0.7688679, b: 1, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}

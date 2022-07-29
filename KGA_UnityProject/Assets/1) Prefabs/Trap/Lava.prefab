@@ -192,6 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e275ce733565c049bba32e8e9aad2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanBuildGround: 1
+  CanBuildWall: 0
+  CanBuildCeiling: 0
   CoolTime: 5
   Cost: 0
   isContinuousTrap: 0
@@ -209,6 +212,7 @@ MonoBehaviour:
   isParticle: 0
   isTrapOn: 0
   isTrapActive: 0
+  target: []
 --- !u!1001 &121369784403358016
 PrefabInstance:
   m_ObjectHideFlags: 0

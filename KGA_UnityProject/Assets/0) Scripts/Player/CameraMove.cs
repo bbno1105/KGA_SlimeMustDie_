@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class CameraMove : MonoBehaviour
 {
@@ -11,20 +12,15 @@ public class CameraMove : MonoBehaviour
     GameObject camera;
     Vector3 cameraPOS;
 
-    public GameObject TestPlayer;
-    public Renderer[] TestRenderer;
+    public GameObject CharacterObj;
 
-    Color color;
-
-    float dist;
+    float defaultCameraDistance;
 
     void Start()
     {
         camera = this.transform.GetChild(0).gameObject;
-        dist = (this.transform.position - camera.transform.position).magnitude;
+        defaultCameraDistance = (this.transform.position - camera.transform.position).magnitude;
         cameraPOS = camera.transform.position;
-
-        TestRenderer = TestPlayer.GetComponentsInChildren<Renderer>();
     }
 
     void Update()
@@ -32,20 +28,25 @@ public class CameraMove : MonoBehaviour
         LookAround();
         ObstacleMove();
 
-        Vector3 cameraD = this.transform.position - camera.transform.position;
-        if (cameraD.magnitude < 1.6f)
+        Vector3 nowCameraDistance = this.transform.position - camera.transform.position;
+
+        if (nowCameraDistance.magnitude < 1.5f)
         {
-            for (int i = 0; i < TestRenderer.Length; i++)
-            {
-                // TestRenderer[i].material.color
-            }
+            CharacterObj.SetActive(false);
+
+            //for (int i = 0; i < meshRenderer.Length; i++)
+            //{
+            //    meshRenderer[i].material.SetFloat("Tweak_transparency", -0.5f);
+            //}
         }
         else
         {
-            for (int i = 0; i < TestRenderer.Length; i++)
-            {
-                TestRenderer[i].enabled = true;
-            }
+            CharacterObj.SetActive(true);
+
+            //for (int i = 0; i < meshRenderer.Length; i++)
+            //{
+            //    meshRenderer[i].material.SetFloat("Tweak_transparency", 0f);
+            //}
         }
 
     }
@@ -74,7 +75,7 @@ public class CameraMove : MonoBehaviour
     void ObstacleMove()
     {
         RaycastHit hit;
-        if(Physics.Raycast(this.transform.position,(camera.transform.position-this.transform.position).normalized, out hit, dist))
+        if(Physics.Raycast(this.transform.position,(camera.transform.position-this.transform.position).normalized, out hit, defaultCameraDistance))
         {
             if (hit.transform.gameObject != camera && hit.transform.gameObject.tag != "Monster" && hit.transform.gameObject.tag != "DamagedMonster" && hit.transform.gameObject.tag != "Player")
             {
