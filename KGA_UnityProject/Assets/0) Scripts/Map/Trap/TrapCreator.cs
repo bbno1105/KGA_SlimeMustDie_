@@ -67,19 +67,18 @@ public class TrapCreator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SelectEffect.transform.rotation *= Quaternion.Euler(0f, -90f, 0f);
+            nowSelectTrap.transform.rotation *= Quaternion.Euler(0f, -90f, 0f);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SelectEffect.transform.rotation *= Quaternion.Euler(0f, 90f, 0f);
+            nowSelectTrap.transform.rotation *= Quaternion.Euler(0f, 90f, 0f);
         }
 
         if (nowSelectTrap == null) return;
         if (nowSelectTrap) nowSelectTrap.SetActive(camerAim.isTarget);
 
         nowSelectTrap.transform.position = new Vector3(this.SelectEffect.transform.position.x, this.SelectEffect.transform.position.y, this.SelectEffect.transform.position.z);
-        nowSelectTrap.transform.rotation = SelectEffect.transform.rotation;
     }
 
     void ChangeSelectTrap()
@@ -140,8 +139,6 @@ public class TrapCreator : MonoBehaviour
                         if (trap.CanBuildWall) canBuild = true;
                         break;
                 }
-                UnityEngine.Debug.Log($"{trap}의 i는 {i} / Ground {trap.CanBuildGround} / Ceiling {trap.CanBuildCeiling} / Wall {trap.CanBuildWall} 그래서 {canBuild}");
-
 
                 if (_block.IsTrapOn[i] || canBuild == false)
                 {
@@ -168,7 +165,7 @@ public class TrapCreator : MonoBehaviour
             Block targetBlock = camerAim.hitObject.GetComponent<Block>();
             if (!camerAim.IsTrapOn && targetBlock != null && nowSelectTrap != null)
             {
-                Instantiate(TrapPrefabs[nowSelect], SelectEffect.transform.position, SelectEffect.transform.rotation); // 로테이션이 나중에 함정 방향이 될 것
+                Instantiate(TrapPrefabs[nowSelect], SelectEffect.transform.position, nowSelectTrap.transform.rotation); // 로테이션이 나중에 함정 방향이 될 것
                 targetBlock.SetTrap(_trapIndex);
             }
         }
