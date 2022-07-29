@@ -14,13 +14,14 @@ public class TrapCreator : MonoBehaviour
     GameObject nowSelectTrap;
 
     Trap trap;
+    float trapAngle = 0;
 
     int nowSelect = 0;
 
     void Update()
     {
-        select();
         SetSelectEffect();
+        select();
     }
 
     void select()
@@ -67,18 +68,25 @@ public class TrapCreator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            nowSelectTrap.transform.rotation *= Quaternion.Euler(0f, -90f, 0f);
+            trapAngle -= 90;
+            trapAngle %= 360;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            nowSelectTrap.transform.rotation *= Quaternion.Euler(0f, 90f, 0f);
+            trapAngle += 90;
+            trapAngle %= 360;
         }
 
         if (nowSelectTrap == null) return;
         if (nowSelectTrap) nowSelectTrap.SetActive(camerAim.isTarget);
 
-        nowSelectTrap.transform.position = new Vector3(this.SelectEffect.transform.position.x, this.SelectEffect.transform.position.y, this.SelectEffect.transform.position.z);
+        nowSelectTrap.transform.position = this.SelectEffect.transform.position; 
+        nowSelectTrap.transform.up = SelectEffect.transform.up;
+        nowSelectTrap.transform.Rotate(0, trapAngle, 0);
+        // nowSelectTrap.transform.localRotation = Quaternion.Euler(nowSelectTrap.transform.localRotation.x, trapAngle, nowSelectTrap.transform.localRotation.z);
+        // UnityEngine.Debug.Log($"nowSelectTrap.transform.forward : {nowSelectTrap.transform.forward}");
+        
     }
 
     void ChangeSelectTrap()
@@ -170,4 +178,5 @@ public class TrapCreator : MonoBehaviour
             }
         }
     }
+
 }
