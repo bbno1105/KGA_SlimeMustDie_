@@ -66,6 +66,12 @@ public class TrapCreator : MonoBehaviour
             ChangeSelectTrap();
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            nowSelect = 5;
+            ChangeSelectTrap();
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             trapAngle -= 90;

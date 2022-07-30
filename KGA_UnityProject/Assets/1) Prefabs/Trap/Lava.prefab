@@ -209,7 +209,9 @@ MonoBehaviour:
   isRigidTrap: 0
   addFource: 0
   isAnimation: 0
-  isParticle: 0
+  isOneTimeAnimation: 0
+  isParticle: 1
+  isOneTimeParticle: 0
   isTrapOn: 0
   isTrapActive: 0
   target: []

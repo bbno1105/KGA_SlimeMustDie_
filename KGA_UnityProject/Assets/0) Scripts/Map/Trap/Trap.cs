@@ -41,8 +41,11 @@ public class Trap : MonoBehaviour
 
     [Header("¿Ã∆Â∆Æ")]
     [SerializeField] bool isAnimation;
+    [SerializeField] bool isOneTimeAnimation;
+
     Animator anim;
     [SerializeField] bool isParticle;
+    [SerializeField] bool isOneTimeParticle;
     ParticleSystem[] particle;
 
 
@@ -114,12 +117,17 @@ public class Trap : MonoBehaviour
                 isTrapOn = false;
                 isTrapActive = false;
 
-                if (isParticle)
+                if (isParticle && isOneTimeParticle == false)
                 {
                     for (int i = 0; i < particle.Length; i++)
                     {
                         particle[i].Stop();
                     }
+                }
+
+                if(isOneTimeAnimation == false)
+                {
+                    anim.SetBool("isActive", false);
                 }
             }
         }
@@ -173,7 +181,17 @@ public class Trap : MonoBehaviour
         if (isFreezeTrap) ActiveFreezeTrap(_target);
         if (isRigidTrap) ActiveJumpTrap(_target);
 
-        if(isAnimation) anim.SetTrigger("isActive");
+        if(isAnimation)
+        {
+            if(isOneTimeAnimation)
+            {
+                anim.SetTrigger("isActive");
+            }
+            else
+            {
+                anim.SetBool("isActive", true);
+            }
+        }
         if(isParticle)
         {
             for (int i = 0; i < particle.Length; i++)
