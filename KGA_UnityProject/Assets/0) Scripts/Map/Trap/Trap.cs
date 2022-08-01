@@ -125,7 +125,7 @@ public class Trap : MonoBehaviour
                     }
                 }
 
-                if(isOneTimeAnimation == false)
+                if(isAnimation && isOneTimeAnimation == false)
                 {
                     anim.SetBool("isActive", false);
                 }

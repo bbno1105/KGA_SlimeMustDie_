@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
+
+[System.Serializable]
+public class PoolData
+{
+    public List<GameObject> PoolObject = new List<GameObject>();
+    public int PoolCount = 0;
+}
 
 public class TrapCreator : MonoBehaviour
 {
-    
     [SerializeField] CameraAim camerAim;
     
     [SerializeField] GameObject SelectEffect;
@@ -15,13 +22,63 @@ public class TrapCreator : MonoBehaviour
 
     Trap trap;
     float trapAngle = 0;
-
     int nowSelect = 0;
+
+    [SerializeField] GameObject poolParent;
+    [SerializeField] PoolData[] trapPool;
+    [SerializeField] int startPoolCount;
+
+    void Start()
+    {
+        // 기본 세팅
+        PlayerControl.Instance.canAttack = true;
+        if (nowSelectTrap)
+        {
+            nowSelectTrap.SetActive(false);
+            nowSelectTrap = null;
+        }
+
+        // 트랩 풀링 세팅
+        trapPool = new PoolData[TrapPrefabs.Length];
+        for (int i = 0; i < trapPool.Length; i++)
+        {
+            trapPool[i] = new PoolData();
+
+            trapPool[i].PoolCount = startPoolCount;
+
+            for (int j = 0; j < trapPool[i].PoolCount; j++)
+            {
+                GameObject trapObj = Instantiate(TrapPrefabs[i]);
+                trapObj.transform.parent = poolParent.transform;
+                trapPool[i].PoolObject.Add(trapObj);
+                trapPool[i].PoolObject[j].SetActive(false);
+            }
+        }
+    }
+
+    GameObject MakeTrap(int _trapIndex)
+    {
+        for (int i = 0; i < trapPool[_trapIndex].PoolCount; i++)
+        {
+            if(!trapPool[_trapIndex].PoolObject[i].activeSelf)
+            {
+                trapPool[_trapIndex].PoolObject[i].SetActive(true);
+                return trapPool[_trapIndex].PoolObject[i];
+            }
+        }
+
+        GameObject trapObj = Instantiate(TrapPrefabs[_trapIndex]);
+        trapObj.transform.parent = poolParent.transform;
+        trapPool[_trapIndex].PoolObject.Add(trapObj);
+        trapPool[_trapIndex].PoolCount++;
+        return trapPool[_trapIndex].PoolObject[trapPool[_trapIndex].PoolCount - 1];
+    }
+
 
     void Update()
     {
-        SetSelectEffect();
         select();
+        setTrap();
     }
 
     void select()
@@ -29,6 +86,7 @@ public class TrapCreator : MonoBehaviour
         // TODO : 나중에 수정할 코드
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            PlayerControl.Instance.canAttack = true;
             if (nowSelectTrap)
             {
                 nowSelectTrap.SetActive(false);
@@ -38,6 +96,7 @@ public class TrapCreator : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+
             nowSelect = 0;
             ChangeSelectTrap();
         }
@@ -92,18 +151,19 @@ public class TrapCreator : MonoBehaviour
         nowSelectTrap.transform.Rotate(0, trapAngle, 0);
         // nowSelectTrap.transform.localRotation = Quaternion.Euler(nowSelectTrap.transform.localRotation.x, trapAngle, nowSelectTrap.transform.localRotation.z);
         // UnityEngine.Debug.Log($"nowSelectTrap.transform.forward : {nowSelectTrap.transform.forward}");
-        
     }
 
     void ChangeSelectTrap()
     {
+        PlayerControl.Instance.canAttack = false;
+
         if (nowSelectTrap) nowSelectTrap.SetActive(false);
         nowSelectTrap = selectTrapPrefabs[nowSelect];
         nowSelectTrap.SetActive(true);
         trap = TrapPrefabs[nowSelect].GetComponent<Trap>();
     }
 
-    void SetSelectEffect()
+    void setTrap()
     {
         if (camerAim.isTarget && nowSelectTrap != null)
         {
@@ -116,7 +176,6 @@ public class TrapCreator : MonoBehaviour
             Block block = camerAim.hit.collider.gameObject.GetComponent<Block>();
 
             FindTileDir(SelectEffect.transform.position, camerAim.hit.collider.gameObject.transform.position, block);
-            
             // SelectEffect.transform.position = new Vector3(camerAim.hitPos.x, SelectEffect.transform.position.y, camerAim.hitPos.z);
         }
         else
@@ -133,7 +192,6 @@ public class TrapCreator : MonoBehaviour
     void FindTileDir(Vector3 _selectPoint, Vector3 _BlockPoint, Block _block)
     {
         Vector3 dirVector = (_BlockPoint - _selectPoint).normalized;
-        UnityEngine.Debug.Log($"dirVector : {dirVector}");
 
         for (int i = 0; i < 6; i++)
         {
@@ -167,20 +225,43 @@ public class TrapCreator : MonoBehaviour
                     camerAim.IsTrapOn = false;
                 }
 
-                Create(i);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Create(i);
+                }
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Delete(i);
+                }
+
             }
         }
     }
 
     void Create(int _trapIndex)
     {
-        if (Input.GetMouseButtonDown(0) && camerAim.isTarget)
+        if (camerAim.isTarget)
         {
             Block targetBlock = camerAim.hitObject.GetComponent<Block>();
             if (!camerAim.IsTrapOn && targetBlock != null && nowSelectTrap != null)
             {
-                Instantiate(TrapPrefabs[nowSelect], SelectEffect.transform.position, nowSelectTrap.transform.rotation); // 로테이션이 나중에 함정 방향이 될 것
                 targetBlock.SetTrap(_trapIndex);
+                GameObject trapObj = MakeTrap(nowSelect);
+                trapObj.transform.position = SelectEffect.transform.position;
+                trapObj.transform.rotation = nowSelectTrap.transform.rotation;
+            }
+        }
+    }
+
+    void Delete(int _trapIndex)
+    {
+        if (camerAim.isTarget)
+        {
+            Block targetBlock = camerAim.hitObject.GetComponent<Block>();
+            if (camerAim.IsTrapOn && targetBlock != null && nowSelectTrap != null)
+            {
+                targetBlock.ClearTrap(_trapIndex);
             }
         }
     }

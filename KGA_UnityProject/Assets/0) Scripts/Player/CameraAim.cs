@@ -9,6 +9,7 @@ public class CameraAim : MonoBehaviour
     public RaycastHit hit;
     
     public bool isTarget;
+    public bool isTrap;
 
     Vector3 screenCenter;
 
@@ -30,9 +31,9 @@ public class CameraAim : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 
         LayerMask targetLayer = LayerMask.NameToLayer("Tile");
-        int layMask = 1 << targetLayer.value;
+        int targetLayMask = 1 << targetLayer.value;
 
-        if (Physics.Raycast(ray, out hit, 10f, layMask))
+        if (Physics.Raycast(ray, out hit, 10f, targetLayMask))
         {
             isTarget = true;
             hitObject = hit.collider.gameObject;
@@ -43,6 +44,4 @@ public class CameraAim : MonoBehaviour
             isTarget = false;
         }
     }
-
-    
 }

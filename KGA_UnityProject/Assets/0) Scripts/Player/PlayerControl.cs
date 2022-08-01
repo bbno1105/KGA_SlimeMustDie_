@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : SingletonMonoBehaviour<PlayerControl>
 {
     [SerializeField] PlayerInfo PInfo;
 
@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform camArm;
 
     Vector2 moveInput;
+
+    public bool canAttack;
 
     public void InitalizeInfo(int _MaxHP, float _AttackPower, float _MoveSpeed)
     {
@@ -41,7 +43,7 @@ public class PlayerControl : MonoBehaviour
     {
         moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && canAttack)
         {
             PInfo.SetAttackState(true);
         }

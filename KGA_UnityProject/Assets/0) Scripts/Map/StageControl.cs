@@ -11,6 +11,8 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
     [SerializeField] float spawnTime;
     float time;
 
+    
+
     void Update()
     {
         time += Time.deltaTime;
