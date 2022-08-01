@@ -246,10 +246,10 @@ public class TrapCreator : MonoBehaviour
             Block targetBlock = camerAim.hitObject.GetComponent<Block>();
             if (!camerAim.IsTrapOn && targetBlock != null && nowSelectTrap != null)
             {
-                targetBlock.SetTrap(_trapIndex);
                 GameObject trapObj = MakeTrap(nowSelect);
                 trapObj.transform.position = SelectEffect.transform.position;
                 trapObj.transform.rotation = nowSelectTrap.transform.rotation;
+                targetBlock.SetTrap(_trapIndex, trapObj);
             }
         }
     }
@@ -261,7 +261,8 @@ public class TrapCreator : MonoBehaviour
             Block targetBlock = camerAim.hitObject.GetComponent<Block>();
             if (camerAim.IsTrapOn && targetBlock != null && nowSelectTrap != null)
             {
-                targetBlock.ClearTrap(_trapIndex);
+                GameObject targetTrap = targetBlock.ClearTrap(_trapIndex);
+                targetTrap.SetActive(false);
             }
         }
     }

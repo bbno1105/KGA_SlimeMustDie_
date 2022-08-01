@@ -209,14 +209,14 @@ public class Monster : CharacterInfo
 
     public void DestroySlime()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Goal")
         {
-            DestroySlime();
+            this.gameObject.SetActive(false);
         }
     }
 

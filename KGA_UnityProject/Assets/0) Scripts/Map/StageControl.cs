@@ -11,7 +11,29 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
     [SerializeField] float spawnTime;
     float time;
 
-    
+    [SerializeField] GameObject poolParent;
+    [SerializeField] PoolData[] monsterPool;
+    [SerializeField] int startPoolCount;
+
+    void Start()
+    {
+        // 트랩 풀링 세팅
+        monsterPool = new PoolData[MonsterPrefabs.Length];
+        for (int i = 0; i < monsterPool.Length; i++)
+        {
+            monsterPool[i] = new PoolData();
+
+            monsterPool[i].PoolCount = startPoolCount;
+
+            for (int j = 0; j < monsterPool[i].PoolCount; j++)
+            {
+                GameObject mobObj = Instantiate(MonsterPrefabs[i]);
+                mobObj.transform.parent = poolParent.transform;
+                monsterPool[i].PoolObject.Add(mobObj);
+                monsterPool[i].PoolObject[j].SetActive(false);
+            }
+        }
+    }
 
     void Update()
     {
@@ -25,10 +47,31 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         }
     }
 
-    void CreateMonster(int stage, int monster)
+    void CreateMonster(int _stage, int _monster)
     {
-        Instantiate(MonsterPrefabs[monster], stageInfo[stage].StartPOS.transform);
+        GameObject monster = MakeMonster(_monster);
+        monster.transform.position = stageInfo[_stage].StartPOS.transform.position;
+        monster.transform.rotation = stageInfo[_stage].StartPOS.transform.rotation;
+
+        UnityEngine.Debug.Log($"생긴다 {stageInfo[_stage].StartPOS.transform.position}");
+        UnityEngine.Debug.Log($"여기 생긴다 {monster.transform.position}");
     }
 
-    
+    GameObject MakeMonster(int _monsterIndex)
+    {
+        for (int i = 0; i < monsterPool[_monsterIndex].PoolCount; i++)
+        {
+            if (!monsterPool[_monsterIndex].PoolObject[i].activeSelf)
+            {
+                monsterPool[_monsterIndex].PoolObject[i].SetActive(true);
+                return monsterPool[_monsterIndex].PoolObject[i];
+            }
+        }
+
+        GameObject mobObj = Instantiate(MonsterPrefabs[_monsterIndex]);
+        mobObj.transform.parent = poolParent.transform;
+        monsterPool[_monsterIndex].PoolObject.Add(mobObj);
+        monsterPool[_monsterIndex].PoolCount++;
+        return monsterPool[_monsterIndex].PoolObject[monsterPool[_monsterIndex].PoolCount - 1];
+    }
 }
