@@ -17,7 +17,7 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
 
     void Start()
     {
-        // 트랩 풀링 세팅
+        // 몬스터 풀링 세팅
         monsterPool = new PoolData[MonsterPrefabs.Length];
         for (int i = 0; i < monsterPool.Length; i++)
         {
