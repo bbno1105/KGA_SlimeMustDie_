@@ -84,7 +84,7 @@ public class Trap : MonoBehaviour
             {
                 for (int i = 0; i < target.Count; i++)
                 {
-                    if (target[i] == null)
+                    if (!target[i].gameObject.activeSelf)
                     {
                         target.RemoveAt(i);
                         continue;

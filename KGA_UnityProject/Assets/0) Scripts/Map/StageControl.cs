@@ -52,9 +52,6 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         GameObject monster = MakeMonster(_monster);
         monster.transform.position = stageInfo[_stage].StartPOS.transform.position;
         monster.transform.rotation = stageInfo[_stage].StartPOS.transform.rotation;
-
-        UnityEngine.Debug.Log($"积变促 {stageInfo[_stage].StartPOS.transform.position}");
-        UnityEngine.Debug.Log($"咯扁 积变促 {monster.transform.position}");
     }
 
     GameObject MakeMonster(int _monsterIndex)
