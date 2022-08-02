@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Monster
   - DamagedMonster
+  - Trap
   layers:
   - Default
   - TransparentFX

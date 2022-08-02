@@ -21,9 +21,6 @@ public class CameraMove : MonoBehaviour
         camera = this.transform.GetChild(0).gameObject;
         defaultCameraDistance = (this.transform.position - camera.transform.position).magnitude;
         cameraPOS = camera.transform.localPosition;
-
-        UnityEngine.Debug.Log($"1: {camera.transform.position} : {cameraPOS}");
-
     }
 
     void Update()
@@ -80,7 +77,7 @@ public class CameraMove : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(this.transform.position,(camera.transform.position-this.transform.position).normalized, out hit, defaultCameraDistance))
         {
-            if (hit.transform.gameObject != camera && hit.transform.gameObject.tag != "Monster" && hit.transform.gameObject.tag != "DamagedMonster" && hit.transform.gameObject.tag != "Player")
+            if (hit.transform.gameObject != camera && hit.transform.gameObject.tag != "Monster" && hit.transform.gameObject.tag != "DamagedMonster" && hit.transform.gameObject.tag != "Player" && hit.transform.gameObject.tag != "Trap")
             {
                 camera.transform.position = hit.point;
             }
@@ -88,7 +85,6 @@ public class CameraMove : MonoBehaviour
         else
         {
             camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, cameraPOS, Time.deltaTime * 5f);
-            UnityEngine.Debug.Log($"{camera.transform.localPosition} : {cameraPOS}");
         }
 
         if((this.transform.position - camera.transform.position).magnitude < 0.1f)

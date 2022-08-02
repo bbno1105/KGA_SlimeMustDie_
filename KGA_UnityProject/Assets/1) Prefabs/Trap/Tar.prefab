@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3827470946702576000}
   m_Layer: 0
   m_Name: Tar
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,9 @@ MonoBehaviour:
   isRigidTrap: 0
   addFource: 0
   isAnimation: 0
+  isOneTimeAnimation: 0
   isParticle: 0
+  isOneTimeParticle: 0
   isTrapOn: 0
   isTrapActive: 0
   target: []
@@ -78,8 +80,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.5, z: 0.9}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Size: {x: 0.9, y: 1, z: 0.9}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &2900649633285860120
 GameObject:
   m_ObjectHideFlags: 0
