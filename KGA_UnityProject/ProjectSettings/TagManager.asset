@@ -9,6 +9,7 @@ TagManager:
   - Monster
   - DamagedMonster
   - Trap
+  - Dead
   layers:
   - Default
   - TransparentFX
