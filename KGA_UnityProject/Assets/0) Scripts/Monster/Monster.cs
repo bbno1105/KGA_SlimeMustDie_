@@ -37,7 +37,7 @@ public class Monster : CharacterInfo
     GameObject target;
     Color defaultColor;
 
-    void Start()
+    void Awake()
     {
         navAgent = this.transform.GetComponent<NavMeshAgent>();
         anim = this.transform.GetComponent<Animator>();
@@ -46,7 +46,13 @@ public class Monster : CharacterInfo
         bodyMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[0];
         faceMaterial = this.transform.GetChild(1).GetComponent<Renderer>().materials[1];
         HPBar = this.transform.GetChild(2).gameObject;
+        defaultColor = bodyMaterial.color;
 
+        Initialized();
+    }
+
+    void OnEnable()
+    {
         Initialized();
     }
 
@@ -54,9 +60,19 @@ public class Monster : CharacterInfo
     {
         this.HP = this.MaxHP;
         SetEndPos(StageControl.Instance.stageInfo[GameData.Player.nowStage].GoalPOS.transform);
+
         this.SetState(STATE.MOVE);
+        this.transform.position = StageControl.Instance.stageInfo[GameData.Player.nowStage].StartPOS.transform.position;
+
         normalFaceNum = Random.Range(0, face.NormalFace.Length);
-        defaultColor = bodyMaterial.color;
+        SetFace(face.NormalFace[normalFaceNum]);
+
+        this.anim.speed = 1;
+        this.navAgent.speed = 1;
+
+        bodyMaterial.color = defaultColor;
+        HPBar.SetActive(true);
+        this.sphereCollider.enabled = true;
     }
 
     void Update()
@@ -65,6 +81,11 @@ public class Monster : CharacterInfo
         {
             Move();
         }
+    }
+
+    void OnDisable()
+    {
+        this.transform.position = StageControl.Instance.stageInfo[GameData.Player.nowStage].StartPOS.transform.position;
     }
 
     // ----------------------------------------------------------------[¿Ãµø]
@@ -216,7 +237,7 @@ public class Monster : CharacterInfo
     {
         if (other.tag == "Goal")
         {
-            this.gameObject.SetActive(false);
+            DestroySlime();
         }
     }
 

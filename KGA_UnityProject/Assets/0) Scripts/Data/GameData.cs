@@ -6,7 +6,7 @@ public class GameData : SingletonMonoBehaviour<GameData> // ΩÃ±€≈Ê πŸ≤Ÿ±‚
 {
     public static PlayerData Player = null;
 
-    void Start()
+    void Awake()
     {
         LoadData();
     }

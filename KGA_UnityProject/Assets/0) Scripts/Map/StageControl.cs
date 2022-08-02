@@ -42,7 +42,7 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         if(time > spawnTime)
         {
             int rand = Random.Range(0, 4);
-            CreateMonster(0,rand);
+            CreateMonster(GameData.Player.nowStage,rand);
             time = 0;
         }
     }

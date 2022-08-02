@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerData
 {
     // 플레이어 데이터
-    public int nowStage;
+    public int nowStage = 0;
 
     // 초기화
     public void Initialize()

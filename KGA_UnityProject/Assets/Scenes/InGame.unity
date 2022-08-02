@@ -9070,16 +9070,16 @@ MonoBehaviour:
   TrapPrefabs:
   - {fileID: 8953282706906756884, guid: 56745d22b12fa5e499c9f77ebac11cb0, type: 3}
   - {fileID: 2727311108960750975, guid: 2a107609c5e087941af2e55f53e6355c, type: 3}
+  - {fileID: 8953282706906756884, guid: 32d456ce149b4b9409582e1741c4cd63, type: 3}
   - {fileID: 2727311108960750975, guid: 48d948d4e664ac64a95aa9f89f0b0db9, type: 3}
   - {fileID: 8953282706906756884, guid: 7475af22dca146043ab83e9ccb39c228, type: 3}
-  - {fileID: 8953282706906756884, guid: 32d456ce149b4b9409582e1741c4cd63, type: 3}
   - {fileID: 2727311108960750975, guid: 4801b6c02fc63c74fa86e790a74d4666, type: 3}
   selectTrapPrefabs:
   - {fileID: 7895893457188609531}
   - {fileID: 3843302779529112070}
+  - {fileID: 1209141882}
   - {fileID: 1913029959}
   - {fileID: 211763835}
-  - {fileID: 1209141882}
   - {fileID: 1761983223}
   poolParent: {fileID: 1397610683}
   trapPool: []
@@ -26001,10 +26001,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.13
+  m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.5, z: -0.030779839}
 --- !u!54 &930674498
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26013,7 +26013,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930674494}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
