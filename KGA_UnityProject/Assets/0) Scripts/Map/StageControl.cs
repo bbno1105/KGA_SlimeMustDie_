@@ -42,7 +42,7 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         if(time > spawnTime)
         {
             int rand = Random.Range(0, 4);
-            CreateMonster(GameData.Player.nowStage,rand);
+            CreateMonster(GameData.Instance.Player.nowStage,rand);
             time = 0;
         }
     }
@@ -50,8 +50,8 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
     void CreateMonster(int _stage, int _monster)
     {
         GameObject monster = MakeMonster(_monster);
-        monster.transform.position = stageInfo[_stage].StartPOS.transform.position;
-        monster.transform.rotation = stageInfo[_stage].StartPOS.transform.rotation;
+        monster.transform.position = stageInfo[_stage].MonsterStartPOS.transform.position;
+        monster.transform.rotation = stageInfo[_stage].MonsterStartPOS.transform.rotation;
     }
 
     GameObject MakeMonster(int _monsterIndex)

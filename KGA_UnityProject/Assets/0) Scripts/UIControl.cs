@@ -10,6 +10,6 @@ public class UIControl : SingletonMonoBehaviour<UIControl>
 
     public void RefreshGoldUI()
     {
-        Gold.text = GameData.Player.gold.ToString();
+        Gold.text = GameData.Instance.Player.gold.ToString();
     }
 }

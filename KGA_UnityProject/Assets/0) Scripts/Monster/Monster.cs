@@ -61,10 +61,10 @@ public class Monster : CharacterInfo
     private void Initialized()
     {
         this.HP = this.MaxHP;
-        SetEndPos(StageControl.Instance.stageInfo[GameData.Player.nowStage].GoalPOS.transform);
+        SetEndPos(StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterGoalPOS.transform);
 
         this.SetState(STATE.MOVE);
-        this.transform.position = StageControl.Instance.stageInfo[GameData.Player.nowStage].StartPOS.transform.position;
+        this.transform.position = StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterStartPOS.transform.position;
 
         normalFaceNum = Random.Range(0, face.NormalFace.Length);
         SetFace(face.NormalFace[normalFaceNum]);
@@ -87,7 +87,7 @@ public class Monster : CharacterInfo
 
     void OnDisable()
     {
-        this.transform.position = StageControl.Instance.stageInfo[GameData.Player.nowStage].StartPOS.transform.position;
+        this.transform.position = StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterStartPOS.transform.position;
     }
 
     // ----------------------------------------------------------------[¿Ãµø]
@@ -126,7 +126,6 @@ public class Monster : CharacterInfo
         if (this.HP <= 0)
         {
             Die();
-            GameData.Player.AddGold(Reward);
         }
     }
 
@@ -213,6 +212,8 @@ public class Monster : CharacterInfo
     // ----------------------------------------------------------------[¡◊¿Ω]
     void Die()
     {
+        GameData.Instance.Player.AddGold(Reward);
+
         this.anim.speed = 1;
         bodyMaterial.color = defaultColor;
 
@@ -238,9 +239,13 @@ public class Monster : CharacterInfo
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Goal")
+        if (other.tag == "Goal" )
         {
             DestroySlime();
+        }
+        else if(other.tag == "Dead")
+        {
+            Die();
         }
     }
 

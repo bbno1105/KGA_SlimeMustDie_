@@ -45,4 +45,12 @@ public class PlayerInfo : CharacterInfo
             this.SetJumpState(false);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Dead")
+        {
+            PlayerControl.Instance.Die();
+        }
+    }
 }

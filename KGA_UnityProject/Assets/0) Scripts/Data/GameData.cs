@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameData : SingletonMonoBehaviour<GameData> // ΩÃ±€≈Ê πŸ≤Ÿ±‚
 {
-    public static PlayerData Player = null;
+    public PlayerData Player = null;
 
     void Awake()
     {
@@ -21,6 +21,7 @@ public class GameData : SingletonMonoBehaviour<GameData> // ΩÃ±€≈Ê πŸ≤Ÿ±‚
         // «√∑π¿ÃæÓ µ•¿Ã≈Õ ∫“∑Øø¿±‚
         if(Player == null)
         {
+            UnityEngine.Debug.Log("µÈæÓø»???");
             Player = new PlayerData();
             Player.Initialize();
         }
@@ -34,7 +35,7 @@ public class GameData : SingletonMonoBehaviour<GameData> // ΩÃ±€≈Ê πŸ≤Ÿ±‚
 
     public void OpenData()
     {
-        
+        Player.SetGold(StageControl.Instance.stageInfo[Player.nowStage].StartGold);
     }
 
     public void RefreshUI()

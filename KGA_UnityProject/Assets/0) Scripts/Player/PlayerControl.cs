@@ -17,12 +17,15 @@ public class PlayerControl : SingletonMonoBehaviour<PlayerControl>
 
     public bool canAttack;
 
-    public void InitalizeInfo(int _MaxHP, float _AttackPower, float _MoveSpeed)
+    public void Initalize()
     {
-        PInfo.SetMaxHP(_MaxHP);
+        PInfo.gameObject.transform.position = StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].PlayerStartPOS.transform.position;
+        PInfo.rigid.isKinematic = false;
+        PInfo.anim.Rebind();
+
         PInfo.SetHP(PInfo.MaxHP);
-        PInfo.SetAttackPower(_AttackPower);
-        PInfo.SetMoveSpeed(_MoveSpeed);
+        PInfo.SetState(CharacterInfo.STATE.IDLE);
+
     }
 
     void Update()
@@ -202,5 +205,21 @@ public class PlayerControl : SingletonMonoBehaviour<PlayerControl>
                 PInfo.jumpblendSpeed = 1f;
             }
         }
+    }
+
+    public void Die()
+    {
+        PInfo.anim.SetTrigger(AnimString.Dead);
+        StartCoroutine(DieCoroutine());
+    }
+
+    IEnumerator DieCoroutine()
+    {
+        PInfo.SetState(CharacterInfo.STATE.DIE);
+        PInfo.rigid.isKinematic = true;
+
+        yield return new WaitForSeconds(5);
+
+        Initalize();
     }
 }

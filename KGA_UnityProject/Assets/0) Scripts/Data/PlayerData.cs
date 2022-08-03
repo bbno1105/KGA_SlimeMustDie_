@@ -29,10 +29,17 @@ public class PlayerData
         UIControl.Instance.RefreshGoldUI();
     }
 
+    public void SetGold(int _Gold)
+    {
+        gold += _Gold;
+        UIControl.Instance.RefreshGoldUI();
+    }
+
     // 초기화
     public void Initialize()
     {
         nowStage = 0;
+        gold = 2000;
     }
 
     // 각 정보

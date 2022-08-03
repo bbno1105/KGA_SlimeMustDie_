@@ -215,7 +215,7 @@ public class Trap : MonoBehaviour
 
     public bool CanBuild()
     {
-        if(GameData.Player.UseGold(Cost))
+        if(GameData.Instance.Player.UseGold(Cost))
         {
             return true;
         }
