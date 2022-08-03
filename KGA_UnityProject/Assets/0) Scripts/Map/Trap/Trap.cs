@@ -15,7 +15,7 @@ public class Trap : MonoBehaviour
     public float CoolTime;
     float nowCoolTime = 0;
 
-    public float Cost;
+    public int Cost;
 
     public bool isContinuousTrap; // 무한 지속인가
     public float CountinueTime; // 얼마나 지속할 것인가
@@ -213,6 +213,17 @@ public class Trap : MonoBehaviour
         }
     }
 
+    public bool CanBuild()
+    {
+        if(GameData.Player.UseGold(Cost))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
     // -----------------------------------------------------------------------------------[데미지 함정]

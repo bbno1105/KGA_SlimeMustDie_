@@ -195,8 +195,8 @@ MonoBehaviour:
   CanBuildGround: 1
   CanBuildWall: 0
   CanBuildCeiling: 0
-  CoolTime: 5
-  Cost: 0
+  CoolTime: 10
+  Cost: 600
   isContinuousTrap: 0
   CountinueTime: 5
   isDamageTrap: 1

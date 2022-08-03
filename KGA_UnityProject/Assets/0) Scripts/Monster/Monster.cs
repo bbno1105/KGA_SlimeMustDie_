@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Monster : CharacterInfo
 {
+    public int Reward;
+
     public Transform StartPos { get; private set; }
     public void SetStartPos(Transform _Pos)
     {
@@ -124,6 +126,7 @@ public class Monster : CharacterInfo
         if (this.HP <= 0)
         {
             Die();
+            GameData.Player.AddGold(Reward);
         }
     }
 

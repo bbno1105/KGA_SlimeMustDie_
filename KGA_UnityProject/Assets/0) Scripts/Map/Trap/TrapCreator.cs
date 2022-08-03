@@ -246,10 +246,23 @@ public class TrapCreator : MonoBehaviour
             Block targetBlock = camerAim.hitObject.GetComponent<Block>();
             if (!camerAim.IsTrapOn && targetBlock != null && nowSelectTrap != null)
             {
-                GameObject trapObj = MakeTrap(nowSelect);
-                trapObj.transform.position = SelectEffect.transform.position;
-                trapObj.transform.rotation = nowSelectTrap.transform.rotation;
-                targetBlock.SetTrap(_trapIndex, trapObj);
+                if(trap.CanBuild())
+                {
+                    GameObject trapObj = MakeTrap(nowSelect);
+                    trapObj.transform.position = SelectEffect.transform.position;
+                    trapObj.transform.rotation = nowSelectTrap.transform.rotation;
+                    targetBlock.SetTrap(_trapIndex, trapObj);
+                }
+                else
+                {
+                    // 돈이 없어요 메시지
+                    UnityEngine.Debug.Log("돈이 없어요 메시지");
+                }
+            }
+            else
+            {
+                // 여기는 지을 수 없어요 메시지
+                UnityEngine.Debug.Log("여기는 지을 수 없어요 메시지");
             }
         }
     }

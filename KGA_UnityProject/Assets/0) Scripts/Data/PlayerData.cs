@@ -8,6 +8,27 @@ public class PlayerData
     // 플레이어 데이터
     public int nowStage = 0;
 
+    int _glod;
+    public int gold { get; private set; }
+
+    public bool UseGold(int _useGold)
+    {
+        if(gold < _useGold)
+        {
+            return false;
+        }
+
+        gold -= _useGold;
+        UIControl.Instance.RefreshGoldUI();
+        return true;
+    }
+
+    public void AddGold(int _addGold)
+    {
+        gold += _addGold;
+        UIControl.Instance.RefreshGoldUI();
+    }
+
     // 초기화
     public void Initialize()
     {

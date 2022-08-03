@@ -27,10 +27,18 @@ public class GameData : SingletonMonoBehaviour<GameData> // 싱글톤 바꾸기
 
         // 게임 데이터 불러오기
         OpenData();
+
+        // UI 갱신
+        RefreshUI();
     }
 
     public void OpenData()
     {
+        
+    }
 
+    public void RefreshUI()
+    {
+        UIControl.Instance.RefreshGoldUI();
     }
 }

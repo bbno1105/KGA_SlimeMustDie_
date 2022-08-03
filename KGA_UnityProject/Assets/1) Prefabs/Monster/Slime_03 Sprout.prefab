@@ -335,6 +335,7 @@ MonoBehaviour:
   <AttackPower>k__BackingField: 0
   <MoveSpeed>k__BackingField: 0
   <State>k__BackingField: 0
+  Reward: 100
   face: {fileID: 11400000, guid: b8e03b07375dddf44955400b6591d46e, type: 2}
 --- !u!195 &4931607755866081623
 NavMeshAgent:
