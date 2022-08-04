@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StageControl : SingletonMonoBehaviour<StageControl>
 {
+
     public StageInfo[] stageInfo;
     
     [SerializeField] GameObject[] MonsterPrefabs;
@@ -14,6 +15,14 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
     [SerializeField] GameObject poolParent;
     [SerializeField] PoolData[] monsterPool;
     [SerializeField] int startPoolCount;
+
+    public bool isStageStart;
+    public bool isStageLoading;
+
+    //테스트를 위한 몬스터 스테이지 변수
+    int stage;
+    int testStage;
+    float testStageTime;
 
     void Start()
     {
@@ -33,17 +42,88 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
                 monsterPool[i].PoolObject[j].SetActive(false);
             }
         }
+        testStage = 1;
+
+        Initialize();
+    }
+
+    void Initialize()
+    {
+        isStageStart = false;
+        isStageLoading = false;
+        testStageTime = 30f;
+        UIControl.Instance.RefreshStageMessage("F키를 누르면 스테이지가 시작됩니다.",1f,false);
+        UIControl.Instance.RefreshStageUI($"{testStage} STAGE");
     }
 
     void Update()
     {
-        time += Time.deltaTime;
-        // TODO : 나중에 스테이지에 따라 나오게 해야할 듯
-        if(time > spawnTime)
+        StartStage();
+    }
+
+    void StartStage()
+    {
+        if(isStageStart)
         {
-            int rand = Random.Range(0, 4);
-            CreateMonster(GameData.Instance.Player.nowStage,rand);
-            time = 0;
+            testStageTime -= Time.deltaTime;
+            if(testStageTime < 0f)
+            {
+                if(testStage <= MonsterPrefabs.Length)
+                {
+                    testStage++;
+                    isStageStart = false;
+                    StartCoroutine(NextStage());
+                }
+                testStageTime = 0;
+            }
+
+            time += Time.deltaTime;
+            // TODO : 나중에 스테이지에 따라 나오게 해야할 듯
+            if (time > spawnTime)
+            {
+                int rand = Random.Range(0, testStage);
+                CreateMonster(GameData.Instance.Player.nowStage, rand);
+                time = 0;
+            }
+
+        }
+        else if(!isStageLoading)
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                StartCoroutine(StageLoading());
+            }
+        }
+    }
+
+    IEnumerator NextStage()
+    {
+        UIControl.Instance.RefreshStageMessage($"{testStage} 스테이지 클리어", 1f, false);
+
+        yield return new WaitForSeconds(3);
+
+        Initialize();
+    }
+
+    IEnumerator StageLoading()
+    {
+        isStageLoading = true;
+
+        for (int i = 0; i < 5; i++)
+        {
+            int count = 5 - i;
+            UIControl.Instance.RefreshStageMessage(count.ToString(),1,false);
+            yield return new WaitForSeconds(1);
+        }
+        UIControl.Instance.RefreshStageMessage("몬스터가 등장합니다.",1,false);
+        isStageStart = true;
+
+        yield return new WaitForSeconds(3);
+
+        while (testStageTime > 0)
+        {
+            UIControl.Instance.RefreshStageMessage($"남은 시간 : {(int)testStageTime}초", 1f, false);
+            yield return new WaitForSeconds(1);
         }
     }
 

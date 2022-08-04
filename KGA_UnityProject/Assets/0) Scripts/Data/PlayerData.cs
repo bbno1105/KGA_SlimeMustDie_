@@ -40,6 +40,7 @@ public class PlayerData
     {
         nowStage = 0;
         gold = 2000;
+        StageControl.Instance.isStageStart = false;
     }
 
     // °¢ Á¤º¸

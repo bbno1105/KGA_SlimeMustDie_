@@ -150,13 +150,13 @@ MonoBehaviour:
   CanBuildGround: 0
   CanBuildWall: 0
   CanBuildCeiling: 1
-  CoolTime: 10
+  CoolTime: 15
   Cost: 700
   isContinuousTrap: 0
   CountinueTime: 5
   isDamageTrap: 1
-  Damage: 10
-  DamageCooltime: 0.5
+  Damage: 5
+  DamageCooltime: 0.2
   isSlowTrap: 0
   SlowSpeed: 0
   isFreezeTrap: 0

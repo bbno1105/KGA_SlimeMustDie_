@@ -200,7 +200,7 @@ MonoBehaviour:
   isContinuousTrap: 0
   CountinueTime: 5
   isDamageTrap: 1
-  Damage: 4
+  Damage: 1
   DamageCooltime: 0.2
   isSlowTrap: 0
   SlowSpeed: 0

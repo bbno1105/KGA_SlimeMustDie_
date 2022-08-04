@@ -256,13 +256,13 @@ public class TrapCreator : MonoBehaviour
                 else
                 {
                     // 돈이 없어요 메시지
-                    UnityEngine.Debug.Log("돈이 없어요 메시지");
+                    UIControl.Instance.RefreshMessage("돈이 부족합니다.");
                 }
             }
             else
             {
                 // 여기는 지을 수 없어요 메시지
-                UnityEngine.Debug.Log("여기는 지을 수 없어요 메시지");
+                UIControl.Instance.RefreshMessage("이곳에는 건설할 수 없습니다.");
             }
         }
     }
