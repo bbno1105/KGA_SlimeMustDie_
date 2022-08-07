@@ -40,6 +40,6 @@ public class GameData : SingletonMonoBehaviour<GameData> // ΩÃ±€≈Ê πŸ≤Ÿ±‚
 
     public void RefreshUI()
     {
-        UIControl.Instance.RefreshGoldUI();
+        MessageControl.Instance.RefreshGoldUI();
     }
 }

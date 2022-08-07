@@ -53,28 +53,32 @@ public class Monster : CharacterInfo
         Initialized();
     }
 
-    void OnEnable()
-    {
-        Initialized();
-    }
-
     private void Initialized()
     {
         this.HP = this.MaxHP;
-        SetEndPos(StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterGoalPOS.transform);
-
-        this.SetState(STATE.MOVE);
-        this.transform.position = StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterStartPOS.transform.position;
-
         normalFaceNum = Random.Range(0, face.NormalFace.Length);
         SetFace(face.NormalFace[normalFaceNum]);
 
+        SetEndPos(StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterGoalPOS.transform);
+        this.transform.position = StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterStartPOS.transform.position;
+
+        this.SetState(STATE.MOVE);
+        isFly = false;
+
+        this.rigid.isKinematic = true;
+        this.sphereCollider.enabled = true;
         this.anim.speed = 1;
+
+        this.navAgent.enabled = true;
         this.navAgent.speed = 1;
 
         bodyMaterial.color = defaultColor;
         HPBar.SetActive(true);
-        this.sphereCollider.enabled = true;
+    }
+
+    void OnEnable()
+    {
+        Initialized();
     }
 
     void Update()
@@ -88,6 +92,29 @@ public class Monster : CharacterInfo
     void OnDisable()
     {
         this.transform.position = StageControl.Instance.stageInfo[GameData.Instance.Player.nowStage].MonsterStartPOS.transform.position;
+    }
+
+
+    void SetFace(Texture _texture)
+    {
+        faceMaterial.SetTexture("_MainTex", _texture);
+    }
+
+    public void DestroySlime()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Goal")
+        {
+            DestroySlime();
+        }
+        else if (other.tag == "Dead")
+        {
+            Die();
+        }
     }
 
     // ----------------------------------------------------------------[이동]
@@ -111,46 +138,41 @@ public class Monster : CharacterInfo
     // ----------------------------------------------------------------[데미지 받음]
     public void DamagedHP(float _damage)
     {
+        StartCoroutine(DamageCoroutine(_damage));
+        StartCoroutine(HPBarUICoroutine());
+    }
+
+    IEnumerator DamageCoroutine(float _damage)
+    {
         this.tag = "DamagedMonster";
         this.HP -= (int)_damage;
         anim.SetTrigger(AnimString.Damaged);
-        HPBar.SetActive(true);
-
 
         if (this.State == STATE.MOVE)
         {
-            StartCoroutine(DamageEffectCoroutine());
+            bodyMaterial.color = new Color(1, 0.2f, 0.2f, 0.8f);
         }
-        StartCoroutine(HPBarUICoroutine());
-        
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.tag = "Monster";
+        bodyMaterial.color = defaultColor;
+
         if (this.HP <= 0)
         {
             Die();
         }
     }
 
-    IEnumerator DamageEffectCoroutine()
-    {
-        bodyMaterial.color = new Color(1, 0.2f, 0.2f, 0.8f);
-
-        yield return new WaitForSeconds(0.1f);
-
-        bodyMaterial.color = defaultColor;
-    }
-
     IEnumerator HPBarUICoroutine()
     {
-        yield return new WaitForSeconds(0.1f);
-        // 때리는 쿨타임을 여기다 넣음 (개날림코드)
-        this.tag = "Monster";
-
+        HPBar.SetActive(true);
         yield return new WaitForSeconds(1.5f);
-
         HPBar.SetActive(false);
     }
 
     // ----------------------------------------------------------------[이동속도 감소]
-    int slowTrapCount = 0;
+    int slowTrapCount = 0; // trap의 trigger가 겹치는 경우가 발생하여 추가
     public void Slow(bool _isOn, float _slowSpeed)
     {
         if (_isOn)
@@ -193,20 +215,35 @@ public class Monster : CharacterInfo
         bodyMaterial.color = defaultColor;
         this.navAgent.speed = 1;
         this.anim.speed = 1;
-        this.SetState(STATE.MOVE);
+
+        if(this.State != STATE.DIE)
+        {
+            this.SetState(STATE.MOVE);
+        }
     }
 
-    // ----------------------------------------------------------------[난다]
+    // ----------------------------------------------------------------[날아감]
     public void Jump(Vector3 _jumpVector)
     {
         if (isFly && rigid.velocity.y > 0) return;
         isFly = true;
 
+        // rigid와 navi를 같이 사용할 수 없음
         navAgent.enabled = false;
         rigid.isKinematic = false;
 
         rigid.velocity = Vector3.zero;
         rigid.velocity = _jumpVector;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (isFly && collision.gameObject.tag == "Ground")
+        {
+            isFly = false;
+            navAgent.enabled = true;
+            rigid.isKinematic = false;
+        }
     }
 
     // ----------------------------------------------------------------[죽음]
@@ -222,76 +259,9 @@ public class Monster : CharacterInfo
         HPBar.SetActive(false);
 
         this.navAgent.speed = 0;
+        this.navAgent.enabled = false;
         this.sphereCollider.enabled = false;
 
         anim.SetTrigger(AnimString.Dead);
     }
-
-    void SetFace(Texture _texture)
-    {
-        faceMaterial.SetTexture("_MainTex", _texture);
-    }
-
-    public void DestroySlime()
-    {
-        this.gameObject.SetActive(false);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Goal" )
-        {
-            DestroySlime();
-        }
-        else if(other.tag == "Dead")
-        {
-            Die();
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (isFly && collision.gameObject.tag == "Ground")
-        {
-            isFly = false;
-            navAgent.enabled = true;
-            rigid.isKinematic = false;
-        }
-    }
-
-    //public void Attack()
-    //{
-    //    target.GetComponent<PlayerInfo>().DamagedHP(this.AttackPower);
-    //}
-
-    //    if(other.tag == "Player")
-    //    {
-    //        SetFace(face.attackFace);
-
-    //        isAttack = true;
-    //        this.SetState(STATE.Attack);
-    //        target = other.gameObject;
-
-    //        navAgent.isStopped = true;
-    //        navAgent.updateRotation = false;
-
-    //        anim.SetBool(AnimString.isAttack, true);
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        SetFace(face.NormalFace[normalFaceNum]);
-
-    //        isAttack = false;
-    //        this.SetState(STATE.MOVE);
-
-    //        navAgent.isStopped = false;
-    //        navAgent.updateRotation = true;
-
-    //        anim.SetBool(AnimString.isAttack, false);
-    //    }
-    //}
 }

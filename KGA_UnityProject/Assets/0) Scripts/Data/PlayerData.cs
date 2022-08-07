@@ -19,20 +19,20 @@ public class PlayerData
         }
 
         gold -= _useGold;
-        UIControl.Instance.RefreshGoldUI();
+        MessageControl.Instance.RefreshGoldUI();
         return true;
     }
 
     public void AddGold(int _addGold)
     {
         gold += _addGold;
-        UIControl.Instance.RefreshGoldUI();
+        MessageControl.Instance.RefreshGoldUI();
     }
 
     public void SetGold(int _Gold)
     {
         gold += _Gold;
-        UIControl.Instance.RefreshGoldUI();
+        MessageControl.Instance.RefreshGoldUI();
     }
 
     // √ ±‚»≠

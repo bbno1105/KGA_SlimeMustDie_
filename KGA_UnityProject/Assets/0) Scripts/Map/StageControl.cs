@@ -52,8 +52,8 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         isStageStart = false;
         isStageLoading = false;
         testStageTime = 30f;
-        UIControl.Instance.RefreshStageMessage("F키를 누르면 스테이지가 시작됩니다.",1f,false);
-        UIControl.Instance.RefreshStageUI($"{testStage} STAGE");
+        MessageControl.Instance.RefreshStageMessage("F키를 누르면 스테이지가 시작됩니다.",1f,false);
+        MessageControl.Instance.RefreshStageUI($"{testStage} STAGE");
     }
 
     void Update()
@@ -98,7 +98,7 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
 
     IEnumerator NextStage()
     {
-        UIControl.Instance.RefreshStageMessage($"{testStage} 스테이지 클리어", 1f, false);
+        MessageControl.Instance.RefreshStageMessage($"{testStage} 스테이지 클리어", 1f, false);
 
         yield return new WaitForSeconds(3);
 
@@ -112,17 +112,17 @@ public class StageControl : SingletonMonoBehaviour<StageControl>
         for (int i = 0; i < 5; i++)
         {
             int count = 5 - i;
-            UIControl.Instance.RefreshStageMessage(count.ToString(),1,false);
+            MessageControl.Instance.RefreshStageMessage(count.ToString(),1,false);
             yield return new WaitForSeconds(1);
         }
-        UIControl.Instance.RefreshStageMessage("몬스터가 등장합니다.",1,false);
+        MessageControl.Instance.RefreshStageMessage("몬스터가 등장합니다.",1,false);
         isStageStart = true;
 
         yield return new WaitForSeconds(3);
 
         while (testStageTime > 0)
         {
-            UIControl.Instance.RefreshStageMessage($"남은 시간 : {(int)testStageTime}초", 1f, false);
+            MessageControl.Instance.RefreshStageMessage($"남은 시간 : {(int)testStageTime}초", 1f, false);
             yield return new WaitForSeconds(1);
         }
     }

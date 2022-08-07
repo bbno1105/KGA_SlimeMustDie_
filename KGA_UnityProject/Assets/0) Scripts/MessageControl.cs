@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIControl : SingletonMonoBehaviour<UIControl>
+public class MessageControl : SingletonMonoBehaviour<MessageControl>
 {
     [SerializeField] TextMeshProUGUI Gold;
     [SerializeField] TextMeshProUGUI Message;
