@@ -77,7 +77,11 @@ public class CameraMove : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(this.transform.position,(camera.transform.position-this.transform.position).normalized, out hit, defaultCameraDistance))
         {
-            if (hit.transform.gameObject != camera && hit.transform.gameObject.tag != "Monster" && hit.transform.gameObject.tag != "DamagedMonster" && hit.transform.gameObject.tag != "Player" && hit.transform.gameObject.tag != "Trap")
+            if (hit.transform.gameObject != camera 
+                && hit.transform.gameObject.tag != "Monster" 
+                && hit.transform.gameObject.tag != "DamagedMonster" 
+                && hit.transform.gameObject.tag != "Player" 
+                && hit.transform.gameObject.tag != "Trap")
             {
                 camera.transform.position = hit.point;
             }

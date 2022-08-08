@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1636520134915492737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 935935935146386566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1866443953779734142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3247981723608387123}
   - component: {fileID: 4593656702340898975}
   - component: {fileID: 1239145601760825291}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6824536091900192342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 4806296216472384352}
   - component: {fileID: 4806296216472384353}
   - component: {fileID: 4806296216472384359}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime_6
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -325,6 +325,7 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 0
   <State>k__BackingField: 0
   Reward: 300
+  TrapObj: []
   face: {fileID: 11400000, guid: b8e03b07375dddf44955400b6591d46e, type: 2}
 --- !u!195 &4806296216472384359
 NavMeshAgent:
@@ -357,7 +358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3570588458702644422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6052797613414371265}
   - component: {fileID: 2965173307933621350}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +481,7 @@ GameObject:
   - component: {fileID: 4174131627159884058}
   - component: {fileID: 4743079776310765385}
   - component: {fileID: 8405740667463728322}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8048924083833508042}
   - component: {fileID: 2583710983843539138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +648,7 @@ GameObject:
   - component: {fileID: 2378158072758983920}
   - component: {fileID: 1287567267610248397}
   - component: {fileID: 1303939300563363737}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1840467337278656008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}

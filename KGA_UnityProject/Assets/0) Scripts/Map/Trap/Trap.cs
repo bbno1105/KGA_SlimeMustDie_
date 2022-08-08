@@ -55,7 +55,7 @@ public class Trap : MonoBehaviour
     // Material material; // 테스트용 Material
     // Color defaultColor;
 
-    [SerializeField] List<Collider> target = new List<Collider>();
+    [SerializeField] List<GameObject> target = new List<GameObject>();
 
 
     void Start()
@@ -86,7 +86,7 @@ public class Trap : MonoBehaviour
                 {
                     if (!target[i].gameObject.activeSelf)
                     {
-                        target.RemoveAt(i);
+                        RemoveMonster(target[i].gameObject);
                         continue;
                     }
                     TrapActivate(target[i]);
@@ -147,35 +147,35 @@ public class Trap : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider _other)
     {
-        if (other.tag == "Monster")
+        if (_other.tag == "Monster" || _other.tag == "DamagedMonster")
         {
-            target.Add(other);
+            AddMonster(_other.gameObject);
 
             // 지속 함정
-            if (isContinuousTrap) TrapPassive(true, other);
+            if (isContinuousTrap) TrapPassive(true, _other.gameObject);
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider _other)
     {
-        if (other.tag == "Monster" || other.tag == "DamagedMonster")
+        if (_other.tag == "Monster" || _other.tag == "DamagedMonster")
         {
-            target.Remove(other);
+            RemoveMonster(_other.gameObject);
 
             // 지속 함정
-            if(isContinuousTrap) TrapPassive(false, other);
+            if(isContinuousTrap) TrapPassive(false, _other.gameObject);
         }
     }
 
-    void TrapActivate(Collider _target)
+    void TrapActivate(GameObject _target)
     {
-        if (_target.GetComponent<Monster>().State == CharacterInfo.STATE.DIE)
-        {
-            target.Remove(_target);
-            return;
-        }
+        //if (_target.GetComponent<Monster>().State == CharacterInfo.STATE.DIE)
+        //{
+        //    RemoveMonster(_target);
+        //    return;
+        //}
 
         if (isDamageTrap) DamageTrap(_target);
         if (isFreezeTrap) ActiveFreezeTrap(_target);
@@ -201,7 +201,7 @@ public class Trap : MonoBehaviour
         }
     }
 
-    void TrapPassive(bool _isOn, Collider _target)
+    void TrapPassive(bool _isOn, GameObject _target)
     {
         if(_isOn)
         {
@@ -225,33 +225,42 @@ public class Trap : MonoBehaviour
         }
     }
 
+    public void AddMonster(GameObject _Monster)
+    {
+        target.Add(_Monster);
+        _Monster.GetComponent<Monster>().AddTrap(this.gameObject);
+    }
+
+    public void RemoveMonster(GameObject _Monster)
+    {
+        target.Remove(_Monster);
+        _Monster.GetComponent<Monster>().RemoveTrap(this.gameObject);
+    }
 
     // -----------------------------------------------------------------------------------[데미지 함정]
-    public void DamageTrap(Collider _other)
+    public void DamageTrap(GameObject _other)
     {
         monster = _other.GetComponent<Monster>();
         monster.DamagedHP(Damage);
     }
 
     // -----------------------------------------------------------------------------------[빙결 함정]
-    public void ActiveFreezeTrap(Collider _other)
+    public void ActiveFreezeTrap(GameObject _other)
     {
         monster = _other.GetComponent<Monster>();
         monster.Freeze(FreezeTime);
     }
 
     // -----------------------------------------------------------------------------------[점프 함정]
-    public void ActiveJumpTrap(Collider _other)
+    public void ActiveJumpTrap(GameObject _other)
     {
         monster = _other.GetComponent<Monster>();
         Vector3 jumpVector = (this.transform.forward * addFource + this.transform.up * 1.5f * addFource);
         monster.Jump(jumpVector);
-        
-
     }
 
     // -----------------------------------------------------------------------------------[이속감소 함정]
-    public void PassiveSlowTrap(bool _isOn, Collider _other)
+    public void PassiveSlowTrap(bool _isOn, GameObject _other)
     {
         monster = _other.GetComponent<Monster>();
         monster.Slow(_isOn,SlowSpeed);

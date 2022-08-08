@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1636063593872451441}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6355830473680867688}
   - component: {fileID: 1834632428935146592}
   - component: {fileID: 779106220789723250}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 936605278926964854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3611035919348967393}
   - component: {fileID: 3611035919348967392}
   - component: {fileID: 3611035919348967394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime_8
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -262,6 +262,7 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 0
   <State>k__BackingField: 0
   Reward: 300
+  TrapObj: []
   face: {fileID: 11400000, guid: b8e03b07375dddf44955400b6591d46e, type: 2}
 --- !u!195 &3611035919348967394
 NavMeshAgent:
@@ -294,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4971116950555993505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +328,7 @@ GameObject:
   - component: {fileID: 1346842282694425234}
   - component: {fileID: 134316564099352716}
   - component: {fileID: 4232045485085458357}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 265601390530557321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3153694725111785265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1754634384033252273}
   - component: {fileID: 3836038814555409388}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271285422073515519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.003_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8501369078636647229}
   - component: {fileID: 4148453655615367989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +681,7 @@ GameObject:
   - component: {fileID: 4102805867569451232}
   - component: {fileID: 4195327267773611380}
   - component: {fileID: 2100970613076176473}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,6 +848,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fc38eb1d15aad094cafb3cb0e7542241, type: 3}
       propertyPath: m_Name
       value: Leaf
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fc38eb1d15aad094cafb3cb0e7542241, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc38eb1d15aad094cafb3cb0e7542241, type: 3}

@@ -19,6 +19,8 @@ public class Monster : CharacterInfo
         this.EndPos = _Pos;
     }
 
+    public List<GameObject> TrapObj;
+
     [SerializeField] Face face;
     int normalFaceNum;
 
@@ -73,7 +75,7 @@ public class Monster : CharacterInfo
         this.navAgent.speed = 1;
 
         bodyMaterial.color = defaultColor;
-        HPBar.SetActive(true);
+        HPBar.SetActive(false);
     }
 
     void OnEnable()
@@ -86,6 +88,15 @@ public class Monster : CharacterInfo
         if (this.State == STATE.MOVE && !isFly)
         {
             Move();
+        }
+
+        if(Input.GetKey(KeyCode.T))
+        {
+            this.tag = "Untagged";
+        }
+        else
+        {
+            this.tag = "Monster";
         }
     }
 
@@ -117,6 +128,16 @@ public class Monster : CharacterInfo
         }
     }
 
+    public void AddTrap(GameObject _trap)
+    {
+        TrapObj.Add(_trap);
+    }
+
+    public void RemoveTrap(GameObject _trap)
+    {
+        TrapObj.Remove(_trap);
+    }
+
     // ----------------------------------------------------------------[이동]
     void Move()
     {
@@ -138,6 +159,15 @@ public class Monster : CharacterInfo
     // ----------------------------------------------------------------[데미지 받음]
     public void DamagedHP(float _damage)
     {
+        this.HP -= (int)_damage;
+        anim.SetTrigger(AnimString.Damaged);
+
+        if (this.HP <= 0)
+        {
+            Die();
+            return;
+        }
+
         StartCoroutine(DamageCoroutine(_damage));
         StartCoroutine(HPBarUICoroutine());
     }
@@ -145,8 +175,6 @@ public class Monster : CharacterInfo
     IEnumerator DamageCoroutine(float _damage)
     {
         this.tag = "DamagedMonster";
-        this.HP -= (int)_damage;
-        anim.SetTrigger(AnimString.Damaged);
 
         if (this.State == STATE.MOVE)
         {
@@ -158,10 +186,7 @@ public class Monster : CharacterInfo
         this.tag = "Monster";
         bodyMaterial.color = defaultColor;
 
-        if (this.HP <= 0)
-        {
-            Die();
-        }
+
     }
 
     IEnumerator HPBarUICoroutine()
@@ -242,7 +267,7 @@ public class Monster : CharacterInfo
         {
             isFly = false;
             navAgent.enabled = true;
-            rigid.isKinematic = false;
+            rigid.isKinematic = true;
         }
     }
 
@@ -263,5 +288,16 @@ public class Monster : CharacterInfo
         this.sphereCollider.enabled = false;
 
         anim.SetTrigger(AnimString.Dead);
+
+        TrapRemove();
+    }
+
+    void TrapRemove()
+    {
+        int count = TrapObj.Count;
+        for (int i = 0; i < count; i++)
+        {
+            TrapObj[0].GetComponent<Trap>().RemoveMonster(this.gameObject);
+        }
     }
 }
